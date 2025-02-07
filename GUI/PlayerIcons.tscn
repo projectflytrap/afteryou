@@ -1,0 +1,160 @@
+[gd_scene load_steps=15 format=3 uid="uid://dxsvspk6dy77x"]
+
+[ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
+[ext_resource type="Texture2D" uid="uid://b38bokx54fsm4" path="res://icon.svg" id="1_gb740"]
+[ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
+[ext_resource type="Script" path="res://GUI/player_icons.gd" id="1_qlet4"]
+[ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="2_anlsm"]
+[ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="2_jwfq2"]
+[ext_resource type="Texture2D" uid="uid://dhpxwsd0fwp3e" path="res://Art/Textures/Trails/Honeytrail1.png" id="3_3ie56"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4q3f"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Gradient" id="Gradient_x4mby"]
+offsets = PackedFloat32Array(0, 0.239829, 0.513919, 1)
+colors = PackedColorArray(1, 0.329412, 0.494118, 1, 0.837604, 0.718684, 0.558218, 1, 0.679202, 0.887313, 0.703479, 1, 0.177059, 1, 0.966258, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_spqjd"]
+gradient = SubResource("Gradient_x4mby")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c53e7"]
+shader = ExtResource("1_jtc5d")
+shader_parameter/stretch = Vector2(0.2, 0.05)
+shader_parameter/stretch2 = Vector2(0.5, 1)
+shader_parameter/xAdd = 0.0
+shader_parameter/xAdd2 = 0.0
+shader_parameter/randPos = Vector2(0, 0)
+shader_parameter/vanishSpeed = 0.2
+shader_parameter/scrollSpeed = 0.4
+shader_parameter/opacity = 0.7
+shader_parameter/extend = 1.0
+shader_parameter/noise = ExtResource("2_jwfq2")
+shader_parameter/text = ExtResource("3_3ie56")
+shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qloiw"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.823529)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_3t3b0"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_qloiw")
+
+[sub_resource type="Theme" id="Theme_7pgjp"]
+default_font = ExtResource("2_anlsm")
+default_font_size = 40
+
+[node name="PlayerIcon" type="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 245.0
+offset_bottom = 112.0
+size_flags_horizontal = 0
+script = ExtResource("1_qlet4")
+
+[node name="PlayerIcon" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OffsetLeft" type="Control" parent="PlayerIcon"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerIcon"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c4q3f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerIcon/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Node2D" type="MarginContainer" parent="PlayerIcon/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="PlayerIcon/PanelContainer/HBoxContainer/Node2D"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_7qf50")
+expand_mode = 1
+
+[node name="Margin" type="MarginContainer" parent="PlayerIcon/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="WinProgress" type="TextureProgressBar" parent="PlayerIcon/PanelContainer/HBoxContainer/Margin"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+max_value = 4.0
+step = 0.0
+value = 2.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("1_gb740")
+
+[node name="Control" type="Control" parent="PlayerIcon"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="PlayerIcon/Control"]
+material = SubResource("ShaderMaterial_c53e7")
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -56.0
+offset_right = 256.0
+offset_bottom = 56.0
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerIcon"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PlayerIcon/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme = SubResource("Theme_3t3b0")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = -4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerIcon/CenterContainer/PanelContainer/MarginContainer"]
+texture_filter = 1
+clip_contents = false
+layout_mode = 2
+theme = SubResource("Theme_7pgjp")
+theme_override_constants/outline_size = 8
+text = "Froghead"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
