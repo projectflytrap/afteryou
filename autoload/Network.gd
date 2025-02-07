@@ -36,7 +36,6 @@ func host(port : int) -> Array: #Returns array, where the first element is a boo
 	new_player_info.username = Global.username
 	player_data = {multiplayer.get_unique_id():new_player_info}
 	Global.player_number = 0
-	print(player_data)
 	#multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	#print("Server started on port", PORT)
 	return [true, str("Server started at ", external_ip, ":", port)]
@@ -108,16 +107,19 @@ func start_game():
 	if game_in_progress:
 		print("Game already in progress!")
 		return
+	var set_up_values = Gameplay.set_up_start_game()
 	game_in_progress = true
 	print("Game started!")
 	# Notify all clients that the game has started
-	rpc("on_game_started")
+	rpc("on_game_started", set_up_values)
 
 
 @rpc("any_peer", "call_local")
-func on_game_started():
+func on_game_started(set_up_values):
 	Global.set_chat_text("The game has started!")
 	game_in_progress = true
+	Gameplay.set_seed(set_up_values["seed"])
+	Gameplay.turn_order = set_up_values["turn_order"]
 	get_tree().change_scene_to_file("res://Phases/main.tscn")
 
 
@@ -133,7 +135,6 @@ func request_player_info(received_player_number : int): #Received by the client 
 	#print("request_player_info_called")
 	var send_player_info : PlayerRequestInfo = PlayerRequestInfo.new()
 	send_player_info.username = Global.username
-	print(sender_id)
 	rpc_id(1, "receive_player_info", send_player_info.to_dict())
 	#print("Sent player info to host:", send_player_info)
 

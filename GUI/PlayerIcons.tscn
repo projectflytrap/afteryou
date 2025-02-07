@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://dxsvspk6dy77x"]
 
 [ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
-[ext_resource type="Texture2D" uid="uid://b38bokx54fsm4" path="res://icon.svg" id="1_gb740"]
 [ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
 [ext_resource type="Script" path="res://GUI/player_icons.gd" id="1_qlet4"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="2_anlsm"]
 [ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="2_jwfq2"]
 [ext_resource type="Texture2D" uid="uid://dhpxwsd0fwp3e" path="res://Art/Textures/Trails/Honeytrail1.png" id="3_3ie56"]
+[ext_resource type="Texture2D" uid="uid://bsawy2qh8ukrk" path="res://Art/GUI/WinProgress.png" id="3_co6qj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4q3f"]
 resource_local_to_scene = true
@@ -40,7 +40,7 @@ shader_parameter/xAdd2 = 0.0
 shader_parameter/randPos = Vector2(0, 0)
 shader_parameter/vanishSpeed = 0.2
 shader_parameter/scrollSpeed = 0.4
-shader_parameter/opacity = 0.7
+shader_parameter/opacity = 0.677
 shader_parameter/extend = 1.0
 shader_parameter/noise = ExtResource("2_jwfq2")
 shader_parameter/text = ExtResource("3_3ie56")
@@ -66,6 +66,7 @@ default_font = ExtResource("2_anlsm")
 default_font_size = 40
 
 [node name="PlayerIcon" type="MarginContainer"]
+texture_filter = 1
 custom_minimum_size = Vector2(200, 0)
 offset_right = 245.0
 offset_bottom = 112.0
@@ -83,46 +84,26 @@ layout_mode = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c4q3f")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerIcon/PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Node2D" type="MarginContainer" parent="PlayerIcon/PanelContainer/HBoxContainer"]
+[node name="Node2D" type="MarginContainer" parent="PlayerIcon/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="TextureRect" type="TextureRect" parent="PlayerIcon/PanelContainer/HBoxContainer/Node2D"]
+[node name="TextureRect" type="TextureRect" parent="PlayerIcon/PanelContainer/Node2D"]
 texture_filter = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("1_7qf50")
 expand_mode = 1
 
-[node name="Margin" type="MarginContainer" parent="PlayerIcon/PanelContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 6
-
-[node name="WinProgress" type="TextureProgressBar" parent="PlayerIcon/PanelContainer/HBoxContainer/Margin"]
-modulate = Color(1, 1, 0, 1)
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-max_value = 4.0
-step = 0.0
-value = 2.0
-fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("1_gb740")
-
 [node name="Control" type="Control" parent="PlayerIcon"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="PlayerIcon/Control"]
+z_index = -2
 material = SubResource("ShaderMaterial_c53e7")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 1
@@ -137,10 +118,13 @@ grow_vertical = 2
 [node name="CenterContainer" type="CenterContainer" parent="PlayerIcon"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PlayerIcon/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerIcon/CenterContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/CenterContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerIcon/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/CenterContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme = SubResource("Theme_3t3b0")
 theme_override_constants/margin_left = 8
@@ -148,7 +132,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = -4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayerIcon/CenterContainer/PanelContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerIcon/CenterContainer/VBoxContainer/PanelContainer/MarginContainer"]
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
@@ -158,3 +142,23 @@ text = "Froghead"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="PlayerIcon/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PlayerIcon/CenterContainer/VBoxContainer/Margin"]
+layout_mode = 2
+
+[node name="WinProgress" type="TextureProgressBar" parent="PlayerIcon/CenterContainer/VBoxContainer/Margin"]
+z_index = -1
+custom_minimum_size = Vector2(72, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+max_value = 4.0
+step = 0.0
+value = 2.0
+nine_patch_stretch = true
+texture_under = ExtResource("3_co6qj")
+texture_progress = ExtResource("3_co6qj")
+tint_under = Color(0.101961, 0.101961, 0.101961, 0.823529)
+tint_progress = Color(0.959605, 0.53492, 0, 1)

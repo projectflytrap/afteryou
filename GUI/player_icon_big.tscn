@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://nt62xwhx152w"]
+
+[ext_resource type="PackedScene" uid="uid://dxsvspk6dy77x" path="res://GUI/PlayerIcons.tscn" id="1_h8rfc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg5p7"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="PlayerIconBig" instance=ExtResource("1_h8rfc")]
+
+[node name="PanelContainer" parent="PlayerIcon" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_pg5p7")
+
+[node name="TextureRect" parent="PlayerIcon/PanelContainer/Node2D" index="0"]
+custom_minimum_size = Vector2(200, 200)
+
+[node name="ColorRect" parent="PlayerIcon/Control" index="0"]
+offset_top = -112.0
+offset_right = 400.0
+offset_bottom = 112.0

@@ -59,7 +59,14 @@ placeholder_text = "Chat!"
 [node name="Panel" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ChatBox" type="RichTextLabel" parent="CenterContainer/VBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ChatBox" type="RichTextLabel" parent="CenterContainer/VBoxContainer/Panel/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2

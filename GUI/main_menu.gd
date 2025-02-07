@@ -22,7 +22,6 @@ func _on_join_btn_pressed() -> void:
 		query_ip = %IPAddressEdit.text
 	var ret = Network.connect_to_server(query_ip)
 	if !ret[0]:
-		#print(ret[1])
 		Global.add_chat_text(ret[1])
 
 func _on_line_edit_text_submitted(new_text: String) -> void:

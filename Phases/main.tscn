@@ -4,26 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://dxsvspk6dy77x" path="res://GUI/PlayerIcons.tscn" id="1_ad3hu"]
 [ext_resource type="Script" path="res://Phases/chat_line_edit.gd" id="2_atisn"]
 [ext_resource type="Script" path="res://Phases/chatbox.gd" id="2_d8833"]
+[ext_resource type="PackedScene" uid="uid://nt62xwhx152w" path="res://GUI/player_icon_big.tscn" id="5_ylh0j"]
 
 [sub_resource type="Theme" id="Theme_ha6gf"]
 default_font = ExtResource("1_1d8nw")
 default_font_size = 22
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4d1e"]
-resource_local_to_scene = true
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [node name="Main" type="Control"]
 texture_filter = 1
@@ -83,19 +68,19 @@ scroll_fit_content_height = true
 caret_multiple = false
 script = ExtResource("2_atisn")
 
-[node name="PlayerIcon" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_ad3hu")]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="PlayerIcon" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
 layout_mode = 2
 
-[node name="PlayerIcon2" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_ad3hu")]
+[node name="PlayerIcon2" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
 layout_mode = 2
 
-[node name="PlayerIcon3" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_ad3hu")]
+[node name="PlayerIcon3" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
 layout_mode = 2
 
-[node name="PlayerIcon4" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_ad3hu")]
+[node name="PlayerIconBig" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_ylh0j")]
 layout_mode = 2
-
-[node name="PanelContainer" parent="MarginContainer/VBoxContainer/PlayerIcon4/PlayerIcon" index="1"]
-theme_override_styles/panel = SubResource("StyleBoxFlat_e4d1e")
-
-[editable path="MarginContainer/VBoxContainer/PlayerIcon4"]
