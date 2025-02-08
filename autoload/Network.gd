@@ -5,17 +5,19 @@ var hosting : bool = false
 var upnp : UPNP
 var game_in_progress = false
 var player_data = {}
-const PORT = 9999
+const PORT = 1234
 const MAX_PLAYERS = 4
 
 func host(port : int) -> Array: #Returns array, where the first element is a bool based on success, and the second element is the error message.
 	hosting = true
 	upnp = UPNP.new()
+	#upnp.delete_port_mapping(PORT, "UDP")
+	#upnp.delete_port_mapping(PORT, "TCP")
 	var discover_result = upnp.discover()
 	if discover_result == UPNP.UPNP_RESULT_SUCCESS:
 		if upnp.get_gateway() and upnp.get_gateway().is_valid_gateway():
-			var map_result_udp = upnp.add_port_mapping(9999, 0, "gd_udp", "UDP", 0)
-			var map_result_tcp = upnp.add_port_mapping(9999, 0, "gd_tcp", "TCP", 0)
+			var map_result_udp = upnp.add_port_mapping(PORT, 0, "gd_udp", "UDP", 0)
+			var map_result_tcp = upnp.add_port_mapping(PORT, 0, "gd_tcp", "TCP", 0)
 		else:
 			return [false, "Failed to get UPNP gateway. Check your router UPNP settings."]
 	else:
@@ -72,8 +74,8 @@ func _on_player_connected(peer_id):
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if hosting:
-			upnp.delete_port_mapping(9999, "UDP")
-			upnp.delete_port_mapping(9999, "TCP")
+			upnp.delete_port_mapping(PORT, "UDP")
+			upnp.delete_port_mapping(PORT, "TCP")
 			print("Deleted port mappings")
 		get_tree().quit()
 
@@ -102,10 +104,13 @@ func receive_rejection(reason: String):
 @rpc("authority")
 func start_game():
 	if multiplayer.get_unique_id() != 1:  # Ensure only the host (peer 1) can start
-		print("Unauthorized attempt to start the game!")
+		print("Unauthorized attempt to start the game! Cannot start the game unless you are hosting.")
 		return
 	if game_in_progress:
 		print("Game already in progress!")
+		return
+	if !hosting:
+		print("Cannot start the game unless you are hosting.")
 		return
 	var set_up_values = Gameplay.set_up_start_game()
 	game_in_progress = true
@@ -120,6 +125,8 @@ func on_game_started(set_up_values):
 	game_in_progress = true
 	Gameplay.set_seed(set_up_values["seed"])
 	Gameplay.turn_order = set_up_values["turn_order"]
+	print("Turn order " + str(Gameplay.turn_order))
+	Gameplay.overwrite_local_player_info(set_up_values["player_info"])
 	get_tree().change_scene_to_file("res://Phases/main.tscn")
 
 

@@ -1,14 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkk53iq7gyj3x"]
+[gd_scene load_steps=6 format=3 uid="uid://dkk53iq7gyj3x"]
 
-[ext_resource type="FontFile" uid="uid://vlw3hbxvpft7" path="res://fonts/Dosis-Book.ttf" id="1_1d8nw"]
-[ext_resource type="PackedScene" uid="uid://dxsvspk6dy77x" path="res://GUI/PlayerIcons.tscn" id="1_ad3hu"]
+[ext_resource type="Script" path="res://Phases/main.gd" id="1_22uwx"]
+[ext_resource type="Theme" uid="uid://brklmhs1by71a" path="res://GUI/Main_theme.tres" id="1_ip8bt"]
 [ext_resource type="Script" path="res://Phases/chat_line_edit.gd" id="2_atisn"]
 [ext_resource type="Script" path="res://Phases/chatbox.gd" id="2_d8833"]
 [ext_resource type="PackedScene" uid="uid://nt62xwhx152w" path="res://GUI/player_icon_big.tscn" id="5_ylh0j"]
-
-[sub_resource type="Theme" id="Theme_ha6gf"]
-default_font = ExtResource("1_1d8nw")
-default_font_size = 22
 
 [node name="Main" type="Control"]
 texture_filter = 1
@@ -16,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1820.0
 offset_bottom = 1080.0
+script = ExtResource("1_22uwx")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -49,18 +46,20 @@ theme_override_constants/margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Chat/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("1_ip8bt")
 
 [node name="Chatbox" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer"]
-texture_filter = 2
+z_index = 3
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_ha6gf")
 bbcode_enabled = true
 text = "Hello"
 scroll_following = true
 script = ExtResource("2_d8833")
 
 [node name="ChatLineEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/Chat/MarginContainer/VBoxContainer"]
+z_index = 3
 layout_mode = 2
 placeholder_text = "Chat"
 wrap_mode = 1
@@ -68,19 +67,12 @@ scroll_fit_content_height = true
 caret_multiple = false
 script = ExtResource("2_atisn")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PlayerIconVbox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 2
 
-[node name="PlayerIcon" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
-layout_mode = 2
-
-[node name="PlayerIcon2" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
-layout_mode = 2
-
-[node name="PlayerIcon3" parent="MarginContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("1_ad3hu")]
-layout_mode = 2
-
 [node name="PlayerIconBig" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_ylh0j")]
+unique_name_in_owner = true
 layout_mode = 2

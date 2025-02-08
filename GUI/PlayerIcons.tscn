@@ -1,28 +1,70 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxsvspk6dy77x"]
+[gd_scene load_steps=18 format=3 uid="uid://dxsvspk6dy77x"]
 
 [ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
 [ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
 [ext_resource type="Script" path="res://GUI/player_icons.gd" id="1_qlet4"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="2_anlsm"]
 [ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="2_jwfq2"]
+[ext_resource type="StyleBox" uid="uid://bs57swxatfq32" path="res://GUI/ProfilePicturePanelStyleBox.tres" id="2_tvykx"]
 [ext_resource type="Texture2D" uid="uid://dhpxwsd0fwp3e" path="res://Art/Textures/Trails/Honeytrail1.png" id="3_3ie56"]
 [ext_resource type="Texture2D" uid="uid://bsawy2qh8ukrk" path="res://Art/GUI/WinProgress.png" id="3_co6qj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4q3f"]
-resource_local_to_scene = true
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[sub_resource type="Animation" id="Animation_c0pt8"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerIcon/OffsetLeft:custom_minimum_size:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerIcon/Control/Wiggly:material:shader_parameter/extend")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lfc7e"]
+resource_name = "Start_Turn"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerIcon/OffsetLeft:custom_minimum_size:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.1, 18.0474, 50, -0.266667, -5.39576, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerIcon/Control/Wiggly:material:shader_parameter/extend")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.166667, 0.145327, 1, -1.2, -0.146443, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0uo7"]
+_data = {
+"RESET": SubResource("Animation_c0pt8"),
+"Start_Turn": SubResource("Animation_lfc7e")
+}
 
 [sub_resource type="Gradient" id="Gradient_x4mby"]
 offsets = PackedFloat32Array(0, 0.239829, 0.513919, 1)
@@ -73,6 +115,11 @@ offset_bottom = 112.0
 size_flags_horizontal = 0
 script = ExtResource("1_qlet4")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g0uo7")
+}
+
 [node name="PlayerIcon" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -80,18 +127,19 @@ theme_override_constants/separation = 0
 [node name="OffsetLeft" type="Control" parent="PlayerIcon"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PlayerIcon"]
+[node name="ProfilePanel" type="PanelContainer" parent="PlayerIcon"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c4q3f")
+theme_override_styles/panel = ExtResource("2_tvykx")
 
-[node name="Node2D" type="MarginContainer" parent="PlayerIcon/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/ProfilePanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="TextureRect" type="TextureRect" parent="PlayerIcon/PanelContainer/Node2D"]
+[node name="TextureRect" type="TextureRect" parent="PlayerIcon/ProfilePanel/MarginContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -102,7 +150,7 @@ expand_mode = 1
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="PlayerIcon/Control"]
+[node name="Wiggly" type="ColorRect" parent="PlayerIcon/Control"]
 z_index = -2
 material = SubResource("ShaderMaterial_c53e7")
 custom_minimum_size = Vector2(256, 0)
@@ -132,7 +180,8 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = -4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayerIcon/CenterContainer/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="UsernameLabel" type="RichTextLabel" parent="PlayerIcon/CenterContainer/VBoxContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 texture_filter = 1
 clip_contents = false
 layout_mode = 2

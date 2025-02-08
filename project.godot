@@ -21,6 +21,10 @@ Global="*res://autoload/global.gd"
 Network="*res://autoload/Network.gd"
 Gameplay="*res://autoload/Gameplay.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=1820

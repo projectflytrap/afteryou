@@ -25,4 +25,4 @@ func get_bb_code_wrapped_color(color : Color, data : String) -> String:
 	return "[color=#" + color.to_html() + "]" + data + "[/color]"
 
 func get_colored_username() -> String:
-	return get_bb_code_wrapped_color(Values.get_color_light(player_number), username)
+	return get_bb_code_wrapped_color(Values.get_color_main(player_number), username)

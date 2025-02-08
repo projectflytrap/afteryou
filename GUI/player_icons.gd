@@ -1,11 +1,9 @@
 extends MarginContainer
 
+func set_player(p_num : int):
+	%UsernameLabel.add_theme_color_override("default_color", Values.get_color_main(p_num))
+	%UsernameLabel.text = Gameplay.local_player_info[p_num].username
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	var new_stylebox = %ProfilePanel.get_theme_stylebox("panel").duplicate()
+	new_stylebox.border_color = Values.get_color_light(p_num)
+	%ProfilePanel.add_theme_stylebox_override("panel", new_stylebox)
