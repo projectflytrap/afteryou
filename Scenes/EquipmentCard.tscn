@@ -1,15 +1,33 @@
-[gd_scene load_steps=14 format=3 uid="uid://chdmowrf3l3v8"]
+[gd_scene load_steps=19 format=3 uid="uid://chdmowrf3l3v8"]
 
-[ext_resource type="Script" path="res://Scenes/monster_card.gd" id="1_vlu0b"]
+[ext_resource type="Script" path="res://Scenes/equipment_card.gd" id="1_o4try"]
+[ext_resource type="Texture2D" uid="uid://wopib4ofal2f" path="res://Art/Card/Characters/Delete.png" id="2_cpsah"]
 [ext_resource type="Texture2D" uid="uid://vkagbomrd0w" path="res://Art/Card/Characters/Wanderer/CardTemplate.png" id="2_p06rw"]
+[ext_resource type="Shader" path="res://Scenes/EquipmentCard.gdshader" id="2_qno78"]
+[ext_resource type="Texture2D" uid="uid://datv6gyouphxq" path="res://Art/Card/Characters/Wanderer/EquipmentBackground.png" id="3_08jro"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="3_e4k1t"]
 [ext_resource type="Texture2D" uid="uid://dnr42uk11lx7b" path="res://Art/Card/Monster/CardFill.png" id="4_6mu7h"]
+[ext_resource type="Texture2D" uid="uid://c0v1fhmuj7uvw" path="res://Art/Card/Characters/Wanderer/EquipmentBorder.png" id="4_u621g"]
 [ext_resource type="FontFile" uid="uid://8oscnfs0un8y" path="res://fonts/Lexend/LexendDeca-Regular.ttf" id="5_7nndt"]
+[ext_resource type="Texture2D" uid="uid://djv4dlhsn48u" path="res://Art/Card/Characters/Wanderer/EquipmentInnerBorder.png" id="5_v2gln"]
 [ext_resource type="Texture2D" uid="uid://droubbfuf06dp" path="res://Art/Card/Icons/SwordHilt.png" id="6_u0iwf"]
 [ext_resource type="Texture2D" uid="uid://b4iv34r8jt7lx" path="res://Art/Card/Icons/Sword.png" id="7_l2ub4"]
 [ext_resource type="Texture2D" uid="uid://dahym5cedkkdr" path="res://Art/Card/Icons/Heart.png" id="8_3duho"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7b78t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir87r"]
+resource_local_to_scene = true
+shader = ExtResource("2_qno78")
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_glow_color = Color(1, 0, 0, 1)
+shader_parameter/border_glow_amount = 0.0
+shader_parameter/border_glow_strength = 1.0
+shader_parameter/inner_border_color = Color(0.242511, 0.635456, 0, 1)
+shader_parameter/background_color = Color(0.39388, 0.44757, 0.310077, 1)
+shader_parameter/background_opacity = 0.821
+shader_parameter/darken = 1.0
+shader_parameter/border = ExtResource("4_u621g")
+shader_parameter/inner_border = ExtResource("5_v2gln")
+shader_parameter/background = ExtResource("3_08jro")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2yd"]
 bg_color = Color(0.352941, 0.282353, 0, 0.768627)
@@ -58,30 +76,20 @@ corner_detail = 9
 shadow_color = Color(0, 0, 0, 0.470588)
 shadow_size = 3
 
-[node name="Equipment" type="Node2D"]
+[node name="Equipment" type="Node2D" groups=["Equipment", "Targetable"]]
 texture_filter = 1
-script = ExtResource("1_vlu0b")
-wiggle_noise = SubResource("FastNoiseLite_7b78t")
+script = ExtResource("1_o4try")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CardBack" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 z_index = -10
-custom_minimum_size = Vector2(195, 195)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -39.0
-offset_top = -39.0
-offset_right = 39.0
-offset_bottom = 39.0
-grow_horizontal = 2
-grow_vertical = 2
+material = SubResource("ShaderMaterial_ir87r")
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_p06rw")
 
 [node name="CardFront" type="MarginContainer" parent="."]
 unique_name_in_owner = true
-z_index = 1
+z_index = 2
 custom_minimum_size = Vector2(220, 200)
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,15 +108,17 @@ layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer"]
+[node name="NamePanel" type="PanelContainer" parent="CardFront/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_je2yd")
 
-[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/NamePanel"]
 layout_mode = 2
-theme_override_constants/margin_bottom = -10
+theme_override_constants/margin_bottom = -12
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer2/MarginContainer"]
+[node name="Name" type="RichTextLabel" parent="CardFront/VBoxContainer/NamePanel/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("3_e4k1t")
@@ -136,7 +146,8 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
+[node name="Effect" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 theme_override_constants/outline_size = 8
@@ -148,32 +159,35 @@ Every .5s: 3 Damage"
 fit_content = true
 scroll_active = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer"]
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatBox" type="HBoxContainer" parent="CardFront/VBoxContainer"]
 visible = false
 z_index = 2
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer/StatBox"]
 layout_mode = 2
 theme = SubResource("Theme_mvi7i")
 theme_override_styles/panel = SubResource("StyleBoxFlat_nojto")
 
-[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/StatBox/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = -10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Control2" type="Control" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer/HBoxContainer"]
 z_index = 5
 layout_mode = 2
 
-[node name="SwordHilt" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control2"]
+[node name="SwordHilt" type="TextureRect" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer/HBoxContainer/Control2"]
 z_index = -6
 layout_mode = 0
 offset_left = -34.0
@@ -183,7 +197,7 @@ offset_bottom = 37.0
 texture = ExtResource("6_u0iwf")
 stretch_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 bbcode_enabled = true
@@ -192,10 +206,10 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Control" type="Control" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Sword" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+[node name="Sword" type="TextureRect" parent="CardFront/VBoxContainer/StatBox/PanelContainer/MarginContainer/HBoxContainer/Control"]
 z_index = -1
 layout_mode = 0
 offset_left = 4.0
@@ -204,26 +218,26 @@ offset_bottom = 40.0
 texture = ExtResource("7_l2ub4")
 stretch_mode = 2
 
-[node name="Control" type="Control" parent="CardFront/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/StatBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer/StatBox"]
 layout_mode = 2
 theme = SubResource("Theme_mvi7i")
 theme_override_styles/panel = SubResource("StyleBoxFlat_nojto")
 
-[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/StatBox/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = -10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/StatBox/PanelContainer2/MarginContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/StatBox/PanelContainer2/MarginContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 bbcode_enabled = true
@@ -232,8 +246,13 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CardFront/VBoxContainer/StatBox/PanelContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 texture = ExtResource("8_3duho")
 stretch_mode = 2
+
+[node name="Delete" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 2
+texture = ExtResource("2_cpsah")

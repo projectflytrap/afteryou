@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn441w0xkq57j"]
+
+[ext_resource type="Script" path="res://Scenes/MainPhase/discarded_equipment.gd" id="1_jn0b2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0sppj"]
+bounce = 0.4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlwbu"]
+size = Vector2(195, 195)
+
+[node name="DiscardedEquipment" type="RigidBody2D"]
+physics_interpolation_mode = 1
+modulate = Color(0.43134, 0.43134, 0.43134, 1)
+z_index = -20
+physics_material_override = SubResource("PhysicsMaterial_0sppj")
+script = ExtResource("1_jn0b2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jlwbu")

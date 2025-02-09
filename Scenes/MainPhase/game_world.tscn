@@ -1,22 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2io0aakdcom3"]
+[gd_scene load_steps=11 format=3 uid="uid://d2io0aakdcom3"]
 
 [ext_resource type="Script" path="res://Scenes/MainPhase/game_world.gd" id="1_tcft4"]
 [ext_resource type="PackedScene" uid="uid://c4i4aes2j7ail" path="res://Scenes/MonsterCard.tscn" id="2_3nb33"]
+[ext_resource type="Script" path="res://Scenes/MainPhase/targeting_arrow.gd" id="3_ofblo"]
+[ext_resource type="Texture2D" uid="uid://1bm72wo4ciny" path="res://Art/GUI/ArrowEnd.png" id="4_cob34"]
 
 [sub_resource type="Environment" id="Environment_cdyar"]
-background_mode = 3
 glow_enabled = true
-glow_intensity = 1.43
-glow_hdr_threshold = 0.53
-glow_hdr_scale = 1.0
-glow_hdr_luminance_cap = 19.29
-glow_map_strength = 1.0
+glow_normalized = true
+glow_intensity = 2.0
+glow_hdr_threshold = 0.9
+glow_hdr_scale = 1.07
+glow_hdr_luminance_cap = 5.0
+glow_map_strength = 0.0
 
-[node name="GameWorld" type="Node2D"]
+[sub_resource type="Curve" id="Curve_uann6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.325342, 0.540859), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.125181, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_wu5os"]
+offsets = PackedFloat32Array(0, 0.313492, 1)
+colors = PackedColorArray(0, 0.537255, 0.403922, 0, 0, 0.770633, 0.739416, 0.765873, 0, 0.843137, 0.843137, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_krhr3"]
+normal = Vector2(-1, 0)
+distance = -1920.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rcdxo"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a82ti"]
+distance = -1081.0
+
+[node name="GameWorld" type="Node2D" groups=["World"]]
 texture_filter = 1
 script = ExtResource("1_tcft4")
 
-[node name="Node2D" parent="." instance=ExtResource("2_3nb33")]
+[node name="MonsterCard" parent="." instance=ExtResource("2_3nb33")]
+z_index = 13
 position = Vector2(1720, 256)
 
 [node name="Control" type="VBoxContainer" parent="."]
@@ -27,9 +48,37 @@ offset_bottom = 40.0
 environment = SubResource("Environment_cdyar")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = -100
 custom_minimum_size = Vector2(3000, 3000)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.259294, 0.259294, 0.259294, 1)
+
+[node name="TargetingArrow" type="Line2D" parent="."]
+z_index = 12
+width = 40.0
+width_curve = SubResource("Curve_uann6")
+gradient = SubResource("Gradient_wu5os")
+joint_mode = 2
+script = ExtResource("3_ofblo")
+
+[node name="Arrowhead" type="Sprite2D" parent="TargetingArrow"]
+modulate = Color(0, 0.843137, 0.843137, 1)
+position = Vector2(1, 0)
+texture = ExtResource("4_cob34")
+offset = Vector2(24, 0)
+
+[node name="WorldBoundaryRight" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryRight"]
+shape = SubResource("WorldBoundaryShape2D_krhr3")
+
+[node name="WorldBoundaryLeft" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryLeft"]
+shape = SubResource("WorldBoundaryShape2D_rcdxo")
+
+[node name="WorldBoundaryBottom" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryBottom"]
+shape = SubResource("WorldBoundaryShape2D_a82ti")

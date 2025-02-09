@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://c40nc2dxsu4bu"]
+
+[ext_resource type="Script" path="res://System/Equipment.gd" id="1_5ujsp"]
+
+[resource]
+script = ExtResource("1_5ujsp")
+name = "Glaive"
+type = 0
+effect_text = "Innate
+Every .5s: 3 Damage"

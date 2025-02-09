@@ -10,6 +10,7 @@ var username : String :
 
 var chat_text : String = ""
 var player_number : int = -1
+var targeter
 
 func add_chat_text(inp : String):
 	if chat_text != "":

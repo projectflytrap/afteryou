@@ -11,7 +11,7 @@ var state = states.unselected
 var lifetime : float = 0.0
 var click_offset : Vector2 = Vector2.ZERO
 var selection_location : Vector2 = Vector2.ZERO #Where the card was clicked initially.
-const FLIP_DISTANCE : float = 500.0
+const FLIP_DISTANCE : float = 300.0
 const WIGGLE_STRENGTH : float = 40.0
 const SELECTION_LENIENCY : float = 0.0
 const MIN_MOUSE_DIST : float = 100.0
@@ -67,6 +67,8 @@ func _process(delta: float) -> void:
 			var border_glow_amount : float = 0.3 + 0.7*flip_amount
 			var border_glow_color = lerp(COLOR_FLIPPING_NONE, COLOR_ATTRACTED, flip_amount)
 			if cardback.material.get_shader_parameter("overwrite_angle_amount") >= 0.995:
+				Global.targeter.base = self
+				Global.targeter.targeting = true
 				state = states.revealed
 				cardback.hide()
 				cardfront.modulate.a = 0.0
