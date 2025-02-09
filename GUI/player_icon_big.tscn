@@ -19,6 +19,10 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [node name="PlayerIconBig" instance=ExtResource("1_h8rfc")]
+mouse_filter = 2
+
+[node name="PlayerIcon" parent="." index="1"]
+mouse_filter = 2
 
 [node name="ProfilePanel" parent="PlayerIcon" index="1"]
 theme_override_styles/panel = SubResource("StyleBoxFlat_w3xj2")

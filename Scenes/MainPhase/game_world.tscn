@@ -15,8 +15,8 @@ glow_hdr_luminance_cap = 5.0
 glow_map_strength = 0.0
 
 [sub_resource type="Curve" id="Curve_uann6"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.325342, 0.540859), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.125181, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.325342, 0.540859), 0.0, 0.0, 0, 0, Vector2(0.976027, 1), 0.125181, 0.0, 0, 0, Vector2(1, 0.621884), -8.67506, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_wu5os"]
 offsets = PackedFloat32Array(0, 0.313492, 1)

@@ -126,10 +126,12 @@ theme_override_constants/separation = 0
 
 [node name="OffsetLeft" type="Control" parent="PlayerIcon"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ProfilePanel" type="PanelContainer" parent="PlayerIcon"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("2_tvykx")
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/ProfilePanel"]
@@ -149,6 +151,7 @@ expand_mode = 1
 [node name="Control" type="Control" parent="PlayerIcon"]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Wiggly" type="ColorRect" parent="PlayerIcon/Control"]
 z_index = -2
@@ -162,6 +165,7 @@ offset_top = -56.0
 offset_right = 256.0
 offset_bottom = 56.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="PlayerIcon"]
 layout_mode = 2
@@ -171,6 +175,7 @@ layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="PlayerIcon/CenterContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerIcon/CenterContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -185,6 +190,7 @@ unique_name_in_owner = true
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
+mouse_filter = 1
 theme = SubResource("Theme_7pgjp")
 theme_override_constants/outline_size = 8
 text = "Froghead"

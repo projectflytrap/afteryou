@@ -2,7 +2,7 @@ extends Node2D
 @onready var cardback = %CardBack
 @onready var delete = %Delete
 var equipment : Equipment
-const SELECTION_LENIENCY : float = 20.0
+const SELECTION_LENIENCY : float = -20.0
 var lifetime := 0.0
 var dead : bool = false
 @onready var discarded_equipment = preload("res://Scenes/MainPhase/discarded_equipment.tscn")

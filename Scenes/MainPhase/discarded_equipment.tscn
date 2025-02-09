@@ -12,8 +12,14 @@ size = Vector2(195, 195)
 physics_interpolation_mode = 1
 modulate = Color(0.43134, 0.43134, 0.43134, 1)
 z_index = -20
+input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_0sppj")
+freeze_mode = 1
 script = ExtResource("1_jn0b2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jlwbu")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

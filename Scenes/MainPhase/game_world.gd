@@ -16,6 +16,7 @@ func _ready() -> void:
 	spawn_character(character)
 	$TargetingArrow.base = $MonsterCard
 	Global.targeter = $TargetingArrow
+	Global.held_object = null
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

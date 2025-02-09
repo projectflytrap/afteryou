@@ -11,6 +11,7 @@ var username : String :
 var chat_text : String = ""
 var player_number : int = -1
 var targeter
+var held_object
 
 func add_chat_text(inp : String):
 	if chat_text != "":
