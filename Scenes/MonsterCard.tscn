@@ -1,0 +1,264 @@
+[gd_scene load_steps=17 format=3 uid="uid://c4i4aes2j7ail"]
+
+[ext_resource type="Texture2D" uid="uid://b705maed4bh8m" path="res://Art/Card/Monster/MonsterCardBack.png" id="1_1trvx"]
+[ext_resource type="Script" path="res://Scenes/monster_card.gd" id="1_mwlha"]
+[ext_resource type="Material" uid="uid://b4p3abbld4db3" path="res://Scenes/MonsterCardFade.tres" id="2_lvat7"]
+[ext_resource type="Material" uid="uid://dcs4x6asikpuw" path="res://Scenes/MonsterCard.tres" id="2_qkf34"]
+[ext_resource type="Texture2D" uid="uid://dvruobajwiasv" path="res://Art/Card/Monster/CardBorderFadeUp.png" id="5_wg4he"]
+[ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="6_34t52"]
+[ext_resource type="Texture2D" uid="uid://dnr42uk11lx7b" path="res://Art/Card/Monster/CardFill.png" id="6_ff3nj"]
+[ext_resource type="FontFile" uid="uid://8oscnfs0un8y" path="res://fonts/Lexend/LexendDeca-Regular.ttf" id="7_23hqt"]
+[ext_resource type="Texture2D" uid="uid://dahym5cedkkdr" path="res://Art/Card/Icons/Heart.png" id="8_vxs1t"]
+[ext_resource type="Texture2D" uid="uid://droubbfuf06dp" path="res://Art/Card/Icons/SwordHilt.png" id="9_1fdgb"]
+[ext_resource type="Texture2D" uid="uid://b4iv34r8jt7lx" path="res://Art/Card/Icons/Sword.png" id="10_8gd32"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7b78t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2yd"]
+bg_color = Color(0.352941, 0.282353, 0, 0.768627)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.729412)
+shadow_size = 4
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4dbx"]
+texture = ExtResource("6_ff3nj")
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 2.0
+modulate_color = Color(0.0352941, 0.0352941, 0.0352941, 0.886275)
+
+[sub_resource type="Theme" id="Theme_bsf34"]
+default_font = ExtResource("6_34t52")
+default_font_size = 38
+RichTextLabel/constants/outline_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xowqc"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.340339, 0.340339, 0.340339, 0.521569)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 9
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 3
+
+[node name="MonsterCard" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_mwlha")
+wiggle_noise = SubResource("FastNoiseLite_7b78t")
+
+[node name="CardFrontStock" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_lvat7")
+custom_minimum_size = Vector2(312, 432)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -216.0
+offset_right = 156.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_wg4he")
+expand_mode = 1
+
+[node name="MonsterCardBack" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_qkf34")
+custom_minimum_size = Vector2(312, 432)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -216.0
+offset_right = 156.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1trvx")
+expand_mode = 1
+
+[node name="CardFront" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(200, 260)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardFront"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_je2yd")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_bottom = -10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("6_34t52")
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "[center]DRAGON"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer"]
+z_index = -1
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_h4dbx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardFront/VBoxContainer/PanelContainer"]
+texture_filter = 1
+layout_mode = 2
+alignment = 2
+
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("7_23hqt")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]On Attack: Deal 1 damage to all allies"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer"]
+z_index = 2
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_bsf34")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xowqc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = -10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control2" type="Control" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+z_index = 5
+layout_mode = 2
+
+[node name="SwordHilt" type="TextureRect" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control2"]
+z_index = -6
+layout_mode = 0
+offset_left = -34.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 37.0
+texture = ExtResource("9_1fdgb")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "3/.5s"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Sword" type="TextureRect" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+z_index = -1
+layout_mode = 0
+offset_left = 4.0
+offset_right = 44.0
+offset_bottom = 40.0
+texture = ExtResource("10_8gd32")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_bsf34")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xowqc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = -10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+texture = ExtResource("8_vxs1t")
+stretch_mode = 2
+
+[connection signal="mouse_entered" from="MonsterCardBack" to="." method="_on_monster_card_back_mouse_entered"]

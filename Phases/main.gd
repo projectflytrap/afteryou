@@ -11,6 +11,10 @@ var player_icons = {}
 func _ready() -> void:
 	initialize_players()
 
+func _process(_delta : float) -> void:
+	pass
+	#print(get_global_mouse_position())
+
 func initialize_players():
 	for i in Gameplay.local_player_info.size() - 1:
 		var new_player_icon = player_icon.instantiate()

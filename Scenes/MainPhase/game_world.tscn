@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2io0aakdcom3"]
+
+[ext_resource type="Script" path="res://Scenes/MainPhase/game_world.gd" id="1_tcft4"]
+[ext_resource type="PackedScene" uid="uid://c4i4aes2j7ail" path="res://Scenes/MonsterCard.tscn" id="2_3nb33"]
+
+[sub_resource type="Environment" id="Environment_cdyar"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.43
+glow_hdr_threshold = 0.53
+glow_hdr_scale = 1.0
+glow_hdr_luminance_cap = 19.29
+glow_map_strength = 1.0
+
+[node name="GameWorld" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_tcft4")
+
+[node name="Node2D" parent="." instance=ExtResource("2_3nb33")]
+position = Vector2(1720, 256)
+
+[node name="Control" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cdyar")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -100
+custom_minimum_size = Vector2(3000, 3000)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.259294, 0.259294, 0.259294, 1)

@@ -1,0 +1,66 @@
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://dcs4x6asikpuw"]
+
+[ext_resource type="Shader" path="res://Scenes/MonsterCard.gdshader" id="1_e7xpt"]
+[ext_resource type="Texture2D" uid="uid://bxbj7eyig3pmu" path="res://Art/Card/Monster/Border.png" id="2_567xg"]
+[ext_resource type="Texture2D" uid="uid://c7j6jkjnfted8" path="res://Art/Card/Monster/CardHoloTexture.png" id="3_cueo5"]
+[ext_resource type="Texture2D" uid="uid://b7qh7ewxyv8r4" path="res://Art/Textures/Maps/cement.jpg" id="4_sgkai"]
+
+[sub_resource type="Gradient" id="Gradient_nyipx"]
+offsets = PackedFloat32Array(0, 0.160714, 0.227679, 0.241071, 0.34375, 0.598214, 0.669643, 0.910714, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.255659, 0.255659, 0.255659, 1, 0.197261, 0.197261, 0.197261, 1, 0.244776, 0.244776, 0.244776, 1, 1.20327e-06, 0.421396, 0.519772, 1, 0.43, 0.43, 0.43, 1, 0.801947, 0.586399, 0.192856, 1, 0.466181, 0.466181, 0.466181, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6qb7a"]
+gradient = SubResource("Gradient_nyipx")
+
+[sub_resource type="Gradient" id="Gradient_if5vy"]
+offsets = PackedFloat32Array(0, 0.272321, 0.375, 0.455357, 0.633929, 0.915179, 1)
+colors = PackedColorArray(1, 0.220567, 0.299749, 1, 0.759995, 0.284326, 0.932235, 1, 0.321957, 0.611422, 0.92397, 1, 1.82897e-06, 0.56156, 0.770272, 1, 8.66354e-07, 0.717676, 0.52246, 1, 0.985606, 0.82515, 0.494096, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bvbjl"]
+frequency = 0.0305
+fractal_type = 3
+fractal_octaves = 3
+fractal_gain = 0.2
+domain_warp_enabled = true
+domain_warp_fractal_octaves = 2
+domain_warp_fractal_lacunarity = 4.91
+domain_warp_fractal_gain = 0.6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s8ea6"]
+width = 256
+height = 343
+seamless = true
+seamless_blend_skirt = 0.353
+color_ramp = SubResource("Gradient_if5vy")
+noise = SubResource("FastNoiseLite_bvbjl")
+
+[resource]
+shader = ExtResource("1_e7xpt")
+shader_parameter/mouse_position = Vector2(0, 0)
+shader_parameter/sprite_position = null
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/inset = 0.0
+shader_parameter/max_tilt = 1.0
+shader_parameter/tilt_amplitude = 100.0
+shader_parameter/max_distance = 770.0
+shader_parameter/overwrite_angle = Vector2(0.5, 1.5)
+shader_parameter/overwrite_angle_amount = 0.0
+shader_parameter/foilcolor = Color(0.544975, 0.544974, 0.544974, 1)
+shader_parameter/threshold = 0.1
+shader_parameter/period = 0.5
+shader_parameter/scroll = 1.0
+shader_parameter/sin_threshold = 1.0
+shader_parameter/foil_threshold = 1.2
+shader_parameter/normal_strength = 1.0
+shader_parameter/effect_alpha_mult = 0.494
+shader_parameter/direction = 0.657
+shader_parameter/border_color = Color(0.522102, 0.524033, 0.395845, 1)
+shader_parameter/border_glow_color = Color(0, 0.933333, 0.207843, 1)
+shader_parameter/border_glow_amount = 0.0
+shader_parameter/border_glow_strength = 4.0
+shader_parameter/border = ExtResource("2_567xg")
+shader_parameter/foil_mask = ExtResource("3_cueo5")
+shader_parameter/gradient = SubResource("GradientTexture1D_6qb7a")
+shader_parameter/noise = SubResource("NoiseTexture2D_s8ea6")
+shader_parameter/normal_map = ExtResource("4_sgkai")

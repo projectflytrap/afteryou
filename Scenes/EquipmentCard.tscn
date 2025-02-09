@@ -1,0 +1,239 @@
+[gd_scene load_steps=14 format=3 uid="uid://chdmowrf3l3v8"]
+
+[ext_resource type="Script" path="res://Scenes/monster_card.gd" id="1_vlu0b"]
+[ext_resource type="Texture2D" uid="uid://vkagbomrd0w" path="res://Art/Card/Characters/Wanderer/CardTemplate.png" id="2_p06rw"]
+[ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="3_e4k1t"]
+[ext_resource type="Texture2D" uid="uid://dnr42uk11lx7b" path="res://Art/Card/Monster/CardFill.png" id="4_6mu7h"]
+[ext_resource type="FontFile" uid="uid://8oscnfs0un8y" path="res://fonts/Lexend/LexendDeca-Regular.ttf" id="5_7nndt"]
+[ext_resource type="Texture2D" uid="uid://droubbfuf06dp" path="res://Art/Card/Icons/SwordHilt.png" id="6_u0iwf"]
+[ext_resource type="Texture2D" uid="uid://b4iv34r8jt7lx" path="res://Art/Card/Icons/Sword.png" id="7_l2ub4"]
+[ext_resource type="Texture2D" uid="uid://dahym5cedkkdr" path="res://Art/Card/Icons/Heart.png" id="8_3duho"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7b78t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2yd"]
+bg_color = Color(0.352941, 0.282353, 0, 0.768627)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.729412)
+shadow_size = 4
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4dbx"]
+texture = ExtResource("4_6mu7h")
+expand_margin_left = 8.0
+expand_margin_top = 4.0
+expand_margin_right = 8.0
+expand_margin_bottom = 2.0
+modulate_color = Color(0.0352941, 0.0352941, 0.0352941, 0.886275)
+
+[sub_resource type="Theme" id="Theme_mvi7i"]
+default_font = ExtResource("3_e4k1t")
+default_font_size = 38
+RichTextLabel/constants/outline_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nojto"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.340339, 0.340339, 0.340339, 0.521569)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 9
+shadow_color = Color(0, 0, 0, 0.470588)
+shadow_size = 3
+
+[node name="Equipment" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_vlu0b")
+wiggle_noise = SubResource("FastNoiseLite_7b78t")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
+custom_minimum_size = Vector2(195, 195)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -39.0
+offset_right = 39.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_p06rw")
+
+[node name="CardFront" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(220, 200)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -101.0
+offset_right = 110.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardFront"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_je2yd")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_bottom = -10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_e4k1t")
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "[center]GLAIVE"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer"]
+z_index = -1
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_h4dbx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardFront/VBoxContainer/PanelContainer"]
+texture_filter = 1
+layout_mode = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("5_7nndt")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]Innate
+Every .5s: 3 Damage"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer"]
+visible = false
+z_index = 2
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CardFront/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_mvi7i")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nojto")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = -10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Control2" type="Control" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+z_index = 5
+layout_mode = 2
+
+[node name="SwordHilt" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control2"]
+z_index = -6
+layout_mode = 0
+offset_left = -34.0
+offset_top = -7.0
+offset_right = 8.0
+offset_bottom = 37.0
+texture = ExtResource("6_u0iwf")
+stretch_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "3/.5s"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Sword" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+z_index = -1
+layout_mode = 0
+offset_left = 4.0
+offset_right = 44.0
+offset_bottom = 40.0
+texture = ExtResource("7_l2ub4")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="CardFront/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="CardFront/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_mvi7i")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nojto")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = -10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CardFront/VBoxContainer/HBoxContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+texture = ExtResource("8_3duho")
+stretch_mode = 2
