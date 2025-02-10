@@ -1,12 +1,75 @@
-[gd_resource type="Resource" script_class="CharacterInfo" load_steps=4 format=3 uid="uid://b3mcmum86p28o"]
+[gd_resource type="Resource" script_class="CharacterInfo" load_steps=13 format=3 uid="uid://b3mcmum86p28o"]
 
 [ext_resource type="Script" path="res://System/Equipment.gd" id="1_q57xg"]
 [ext_resource type="Resource" uid="uid://c40nc2dxsu4bu" path="res://Characters/Wanderer/E_glaive.tres" id="2_tc8s1"]
 [ext_resource type="Script" path="res://System/CharacterInfo.gd" id="3_p5ri6"]
 
+[sub_resource type="Resource" id="Resource_i3xpw"]
+script = ExtResource("1_q57xg")
+name = "Glaive2"
+type = 0
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_4lmo8"]
+script = ExtResource("1_q57xg")
+name = "Glaive3"
+type = 0
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_l6qrn"]
+script = ExtResource("1_q57xg")
+name = "4"
+type = 1
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_vgmct"]
+script = ExtResource("1_q57xg")
+name = "5"
+type = 2
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_k4ymk"]
+script = ExtResource("1_q57xg")
+name = "123t"
+type = 3
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_auh3p"]
+script = ExtResource("1_q57xg")
+name = "Glaive"
+type = 3
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_t77cg"]
+script = ExtResource("1_q57xg")
+name = "25"
+type = 1
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_h018j"]
+script = ExtResource("1_q57xg")
+name = "3"
+type = 2
+effect_text = "Innate
+Every .5s: 3 Damage"
+
+[sub_resource type="Resource" id="Resource_8jwjj"]
+script = ExtResource("1_q57xg")
+name = "5"
+type = 1
+effect_text = "Innate
+Every .5s: 3 Damage"
+
 [resource]
 script = ExtResource("3_p5ri6")
 character_name = "Kamal"
 title = "The Traveler"
-equipment_list = Array[ExtResource("1_q57xg")]([ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1"), ExtResource("2_tc8s1")])
+equipment_list = Array[ExtResource("1_q57xg")]([ExtResource("2_tc8s1"), SubResource("Resource_i3xpw"), SubResource("Resource_4lmo8"), SubResource("Resource_l6qrn"), SubResource("Resource_vgmct"), SubResource("Resource_k4ymk"), SubResource("Resource_auh3p"), SubResource("Resource_t77cg"), SubResource("Resource_h018j"), SubResource("Resource_8jwjj")])
 equipment_color = Color(0.551857, 0.509344, 0.419743, 1)

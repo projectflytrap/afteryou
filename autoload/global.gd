@@ -12,6 +12,8 @@ var chat_text : String = ""
 var player_number : int = -1
 var targeter
 var held_object
+var game_size = Vector2(1920,1080)
+var main_scene : Node
 
 func add_chat_text(inp : String):
 	if chat_text != "":

@@ -5,8 +5,10 @@ var hosting : bool = false
 var upnp : UPNP
 var game_in_progress = false
 var player_data = {}
-const PORT = 1234
+var player_data_pnum_ind = {} #Copy of player_data but the indexes are all the player numbers
+const PORT = 9999
 const MAX_PLAYERS = 4
+signal _on_all_players_ready
 
 func host(port : int) -> Array: #Returns array, where the first element is a bool based on success, and the second element is the error message.
 	hosting = true
@@ -116,7 +118,12 @@ func start_game():
 	game_in_progress = true
 	print("Game started!")
 	# Notify all clients that the game has started
+	reset_ready_protocol()
+	player_data_pnum_ind.clear()
+	for i in player_data.keys():
+		player_data_pnum_ind[player_data[i].player_number] = player_data[i]
 	rpc("on_game_started", set_up_values)
+	
 
 
 @rpc("any_peer", "call_local")
@@ -128,6 +135,7 @@ func on_game_started(set_up_values):
 	print("Turn order " + str(Gameplay.turn_order))
 	Gameplay.overwrite_local_player_info(set_up_values["player_info"])
 	get_tree().change_scene_to_file("res://Phases/main.tscn")
+	
 
 
 @rpc("authority")
@@ -166,3 +174,28 @@ func get_unused_player_number() -> int:
 			print("Assigned player number : ", i)
 			return i
 	return 0
+
+func reset_ready_protocol() -> void:
+	var my_id = multiplayer.get_unique_id()
+	if my_id != 1:
+		print("Warning: Unauthorized request from peer to reset ready protocol")
+		return  # Ignore the request if it's not from the host
+	for i in player_data.keys():
+		player_data[i].ready = false
+
+
+@rpc("any_peer", "call_local")
+func ready_protocol():
+	var my_id = multiplayer.get_unique_id()
+	if my_id != 1:
+		print("Warning: Unauthorized request from peer to call ready_protocol. Only hosts should call this function.")
+		return  # Ignore the request if it's not from the host
+	var sender_id = multiplayer.get_remote_sender_id()
+	player_data[sender_id].ready = true
+	for i in player_data.keys():
+		if not player_data[i].is_ready():
+			return
+	emit_signal("_on_all_players_ready")
+
+func get_player_info_from_pnum(pnum : int):
+	return player_data_pnum_ind[pnum]

@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://dcs4x6asikpuw"]
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://b6y31xmpiqwxu"]
 
-[ext_resource type="Shader" path="res://Scenes/MonsterCard.gdshader" id="1_e7xpt"]
-[ext_resource type="Texture2D" uid="uid://bxbj7eyig3pmu" path="res://Art/Card/Monster/Border.png" id="2_567xg"]
-[ext_resource type="Texture2D" uid="uid://c7j6jkjnfted8" path="res://Art/Card/Monster/CardHoloTexture.png" id="3_cueo5"]
-[ext_resource type="Texture2D" uid="uid://b7qh7ewxyv8r4" path="res://Art/Textures/Maps/cement.jpg" id="4_sgkai"]
+[ext_resource type="Shader" path="res://Scenes/MonsterCard.gdshader" id="1_jf6et"]
+[ext_resource type="Texture2D" uid="uid://bxbj7eyig3pmu" path="res://Art/Card/Monster/Border.png" id="2_43fex"]
+[ext_resource type="Texture2D" uid="uid://c7j6jkjnfted8" path="res://Art/Card/Monster/CardHoloTexture.png" id="3_k2wov"]
+[ext_resource type="Texture2D" uid="uid://b7qh7ewxyv8r4" path="res://Art/Textures/Maps/cement.jpg" id="4_achqs"]
 
 [sub_resource type="Gradient" id="Gradient_nyipx"]
 offsets = PackedFloat32Array(0, 0.160714, 0.227679, 0.241071, 0.34375, 0.598214, 0.669643, 0.910714, 1)
@@ -36,13 +36,13 @@ noise = SubResource("FastNoiseLite_bvbjl")
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource("1_e7xpt")
+shader = ExtResource("1_jf6et")
 shader_parameter/mouse_position = Vector2(0, 0)
 shader_parameter/sprite_position = null
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
 shader_parameter/inset = 0.0
-shader_parameter/max_tilt = 1.0
+shader_parameter/max_tilt = 0.25
 shader_parameter/tilt_amplitude = 100.0
 shader_parameter/max_distance = 770.0
 shader_parameter/overwrite_angle = Vector2(0.5, 1.5)
@@ -60,9 +60,9 @@ shader_parameter/border_color = Color(0.522102, 0.524033, 0.395845, 1)
 shader_parameter/border_glow_color = Color(0, 0.933333, 0.207843, 1)
 shader_parameter/border_glow_amount = 0.0
 shader_parameter/border_glow_strength = 10.0
-shader_parameter/alpha = 1.0
-shader_parameter/border = ExtResource("2_567xg")
-shader_parameter/foil_mask = ExtResource("3_cueo5")
+shader_parameter/alpha = 0.7
+shader_parameter/border = ExtResource("2_43fex")
+shader_parameter/foil_mask = ExtResource("3_k2wov")
 shader_parameter/gradient = SubResource("GradientTexture1D_6qb7a")
 shader_parameter/noise = SubResource("NoiseTexture2D_s8ea6")
-shader_parameter/normal_map = ExtResource("4_sgkai")
+shader_parameter/normal_map = ExtResource("4_achqs")

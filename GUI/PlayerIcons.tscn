@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxsvspk6dy77x"]
+[gd_scene load_steps=19 format=3 uid="uid://dxsvspk6dy77x"]
 
 [ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
 [ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
@@ -30,7 +30,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -60,8 +60,34 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 2)
 }
 
+[sub_resource type="Animation" id="Animation_sdosf"]
+resource_name = "End_Turn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerIcon/OffsetLeft:custom_minimum_size:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(50, -0.266667, -5.39576, 0.233333, 45.6212, 0, -1.2, 4.321, 0.1, 18.0474),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerIcon/Control/Wiggly:material:shader_parameter/extend")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -1.2, -0.146443, 0.233333, -0.668792, 0.000323024, -0.366667, 0.00704011, 0.166667, 0.145327),
+"times": PackedFloat32Array(0, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g0uo7"]
 _data = {
+"End_Turn": SubResource("Animation_sdosf"),
 "RESET": SubResource("Animation_c0pt8"),
 "Start_Turn": SubResource("Animation_lfc7e")
 }
@@ -74,6 +100,7 @@ colors = PackedColorArray(1, 0.329412, 0.494118, 1, 0.837604, 0.718684, 0.558218
 gradient = SubResource("Gradient_x4mby")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c53e7"]
+resource_local_to_scene = true
 shader = ExtResource("1_jtc5d")
 shader_parameter/stretch = Vector2(0.2, 0.05)
 shader_parameter/stretch2 = Vector2(0.5, 1)
@@ -83,7 +110,7 @@ shader_parameter/randPos = Vector2(0, 0)
 shader_parameter/vanishSpeed = 0.2
 shader_parameter/scrollSpeed = 0.4
 shader_parameter/opacity = 0.677
-shader_parameter/extend = 1.0
+shader_parameter/extend = 0.0
 shader_parameter/noise = ExtResource("2_jwfq2")
 shader_parameter/text = ExtResource("3_3ie56")
 shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
@@ -107,7 +134,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_qloiw")
 default_font = ExtResource("2_anlsm")
 default_font_size = 40
 
-[node name="PlayerIcon" type="MarginContainer"]
+[node name="PlayerIcon" type="MarginContainer" groups=["PlayerIcon"]]
 texture_filter = 1
 custom_minimum_size = Vector2(200, 0)
 offset_right = 245.0

@@ -2,7 +2,8 @@ extends Node2D
 @onready var cardback = %CardBack
 @onready var delete = %Delete
 var equipment : Equipment
-const SELECTION_LENIENCY : float = -20.0
+var id : int = 0
+const SELECTION_LENIENCY : float = -6.0
 var lifetime := 0.0
 var dead : bool = false
 @onready var discarded_equipment = preload("res://Scenes/MainPhase/discarded_equipment.tscn")
@@ -23,10 +24,12 @@ func assign_info(info : Equipment):
 func _process(delta: float) -> void:
 	if dead:
 		return
-	var is_target : bool = Global.targeter && Global.targeter.target == self
+	var is_target : bool = Global.targeter.targeting && Global.targeter.target == self
 	lifetime += delta
+	if is_target:
+		get_tree().call_group("Synchronizer", "_set_targeting_index", id)
 	if is_target && Input.is_action_just_pressed("Click"):
-		kms()
+		Global.targeter.base.card_action_chosen(self)
 	cardback.material.set_shader_parameter("border_glow_amount", Kinematics.dampf(cardback.material.get_shader_parameter("border_glow_amount"), float(is_target), 8.0, delta))
 	delete.modulate.a = (1.0+sin(lifetime*5.0))*0.5 * float(is_target)
 
@@ -57,10 +60,8 @@ func kms():
 	get_parent().remove_equipment(self)
 	cardback.material.set_shader_parameter("border_glow_amount", 1.0)
 	cardback.material.set_shader_parameter("darken", 0.7)
-	
 	delete.modulate.a = 0.0
 	remove_from_group("Targetable")
-	Global.targeter.target = null
 	dead = true
 	await get_tree().physics_frame
 	get_parent().remove_child(self)
@@ -69,3 +70,10 @@ func kms():
 	cardback.material.set_shader_parameter("border_glow_amount", 0.0)
 	delete.modulate.a = 0.0
 	
+func remove_target():
+	get_parent().get_node("Synchronizer").current_target_index = -1
+	Global.targeter.remove_selection()
+
+func remove():
+	kms()
+	remove_target()

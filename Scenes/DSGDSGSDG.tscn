@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckbkviagn3ssf"]
+
+[ext_resource type="PackedScene" uid="uid://cotcgh0ugvira" path="res://Scenes/bail_card.tscn" id="1_gu08b"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xcvrj"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ccc0h"]
+distance = -86.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(688, 261)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-14, -1)
+shape = SubResource("WorldBoundaryShape2D_xcvrj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(688, 261)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_ccc0h")
+
+[node name="BailCardBase" parent="." instance=ExtResource("1_gu08b")]
+position = Vector2(684, 201)

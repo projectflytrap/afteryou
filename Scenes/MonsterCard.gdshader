@@ -42,6 +42,8 @@ uniform sampler2D gradient;
 uniform sampler2D noise;
 uniform sampler2D normal_map;
 
+uniform float alpha : hint_range(0.0, 1.0) = 1.0;
+
 varying smooth vec2 direction_to;
 varying smooth vec2 passthrough;
 
@@ -147,4 +149,5 @@ void fragment() {
 	//Make borders glow
 	vec3 glow_border = mix(COLOR.rgb, border_glow_color.rgb * border_glow_strength, border_glow_amount);
 	COLOR.rgb = COLOR.rgb * float(!is_border) + glow_border * float(is_border);
+	COLOR.a *= alpha;
 }

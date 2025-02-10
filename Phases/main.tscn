@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkk53iq7gyj3x"]
+[gd_scene load_steps=8 format=3 uid="uid://dkk53iq7gyj3x"]
 
 [ext_resource type="Script" path="res://Phases/main.gd" id="1_22uwx"]
 [ext_resource type="Theme" uid="uid://brklmhs1by71a" path="res://GUI/Main_theme.tres" id="1_ip8bt"]
 [ext_resource type="Script" path="res://Phases/chat_line_edit.gd" id="2_atisn"]
 [ext_resource type="Script" path="res://Phases/chatbox.gd" id="2_d8833"]
 [ext_resource type="PackedScene" uid="uid://d2io0aakdcom3" path="res://Scenes/MainPhase/game_world.tscn" id="2_x3irw"]
+[ext_resource type="PackedScene" uid="uid://dusl3g51mvbuq" path="res://GUI/your_turn_banner.tscn" id="3_eqb8d"]
 [ext_resource type="PackedScene" uid="uid://nt62xwhx152w" path="res://GUI/player_icon_big.tscn" id="5_ylh0j"]
 
 [node name="Main" type="Control"]
@@ -21,25 +22,9 @@ script = ExtResource("1_22uwx")
 [node name="GameWorld" parent="." instance=ExtResource("2_x3irw")]
 z_index = -100
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-visible = false
-texture_filter = 1
+[node name="YourTurnBanner" parent="." instance=ExtResource("3_eqb8d")]
+z_index = 80
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-msaa_2d = 2
-use_hdr_2d = true
-gui_snap_controls_to_pixels = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
 
 [node name="HUD" type="MarginContainer" parent="."]
 layout_mode = 1

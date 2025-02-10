@@ -3,7 +3,8 @@ extends Node2D
 @onready var cardback = %MonsterCardBack
 @onready var cardfront = %CardFront
 @onready var cardfrontstock = %CardFrontStock
-enum states {unselected, flipping, revealed}
+
+enum states {unselected, flipping, revealed, fade_out, fade_out_dungeon}
 #Unselected, is when the player hasn't selected the card yet.
 #flipping is while the player is still selecting the card.
 @export var wiggle_noise : FastNoiseLite
@@ -11,17 +12,18 @@ var state = states.unselected
 var lifetime : float = 0.0
 var click_offset : Vector2 = Vector2.ZERO
 var selection_location : Vector2 = Vector2.ZERO #Where the card was clicked initially.
+var home = null
 const FLIP_DISTANCE : float = 300.0
 const WIGGLE_STRENGTH : float = 40.0
 const SELECTION_LENIENCY : float = 0.0
 const MIN_MOUSE_DIST : float = 100.0
-const MAX_MOUSE_DIST : float = 350.0
+const MAX_MOUSE_DIST : float = 400.0
 const COLOR_ATTRACTED : Color = Color(0, 0.933, 0.208)
 const COLOR_FLIPPING_NONE : Color = Color(0.94, 0.898, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	position = get_screen_position()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,6 +93,17 @@ func _process(delta: float) -> void:
 			cardfrontstock.material.set_shader_parameter("mouse_position", get_global_mouse_position())
 			cardfrontstock.material.set_shader_parameter("sprite_position", position)
 			cardfrontstock.material.set_shader_parameter("max_tilt", 0.1)
+			
+		states.fade_out:
+			cardfrontstock.material.set_shader_parameter("overwrite_angle_amount", Kinematics.dampf(cardfrontstock.material.get_shader_parameter("overwrite_angle_amount"), 1.0, 3.0, delta))
+			cardfront.position.y = Kinematics.dampf(cardfront.position.y, 0.0, 7.0, delta)
+			cardfront.modulate.a = Kinematics.dampf(cardfront.modulate.a, 0.0, 4.0, delta)
+			if home == null:
+				desired_position = get_screen_position() + Vector2(0.0, -200.0)
+			else:
+				desired_position = home.global_position
+			if cardfront.modulate.a <= 0.05:
+				queue_free()
 	position = Kinematics.damp(position, desired_position, damp_lambda, delta)
 
 
@@ -114,4 +127,16 @@ func get_mouse_attraction() -> float:
 	return clampf(remap(get_distance_to_mouse(),MIN_MOUSE_DIST,MAX_MOUSE_DIST,1.0,0.0), 0.0, 1.0)
 
 func get_screen_position() -> Vector2:
-	return Vector2(get_viewport().size.x - cardback.size.x * 0.5 - 60.0, cardback.size.y * 0.5 + 60.0)
+	return Vector2(Global.game_size.x - cardback.size.x * 0.5 - 60.0, cardback.size.y * 0.5 + 60.0)
+
+func card_action_chosen(_target):
+	var decision : MainPhaseDecision = MainPhaseDecision.new()
+	home = _target
+	if _target.is_in_group("Equipment"):
+		state = states.fade_out
+		decision.intent = MainPhaseDecision.intents.remove_equipment
+		decision.equipment_id = _target.id
+	else:
+		state = states.fade_out_dungeon
+		decision.intent = MainPhaseDecision.intents.add_monster
+	Gameplay.end_turn(decision)

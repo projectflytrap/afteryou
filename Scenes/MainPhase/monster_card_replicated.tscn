@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu2x2lxex4o6t"]
+
+[ext_resource type="Script" path="res://Scenes/MainPhase/monster_card_replicated.gd" id="1_hd37q"]
+[ext_resource type="Material" uid="uid://b6y31xmpiqwxu" path="res://Scenes/MainPhase/monster_card_replicated.tres" id="2_2j6v1"]
+[ext_resource type="Texture2D" uid="uid://b705maed4bh8m" path="res://Art/Card/Monster/MonsterCardBack.png" id="2_sjkyk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1lenq"]
+
+[node name="MonsterCardReplicated" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_hd37q")
+wiggle_noise = SubResource("FastNoiseLite_1lenq")
+
+[node name="MonsterCardBack" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_2j6v1")
+custom_minimum_size = Vector2(312, 432)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -216.0
+offset_right = 156.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sjkyk")
+expand_mode = 1
+
+[connection signal="mouse_entered" from="MonsterCardBack" to="." method="_on_monster_card_back_mouse_entered"]
