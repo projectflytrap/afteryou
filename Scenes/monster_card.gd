@@ -95,6 +95,7 @@ func _process(delta: float) -> void:
 			cardfrontstock.material.set_shader_parameter("max_tilt", 0.1)
 			
 		states.fade_out:
+			cardback.material.set_shader_parameter("alpha", Kinematics.dampf(cardback.material.get_shader_parameter("alpha"), 0.0, 7.0, delta))
 			cardfrontstock.material.set_shader_parameter("overwrite_angle_amount", Kinematics.dampf(cardfrontstock.material.get_shader_parameter("overwrite_angle_amount"), 1.0, 3.0, delta))
 			cardfront.position.y = Kinematics.dampf(cardfront.position.y, 0.0, 7.0, delta)
 			cardfront.modulate.a = Kinematics.dampf(cardfront.modulate.a, 0.0, 4.0, delta)
@@ -140,3 +141,7 @@ func card_action_chosen(_target):
 		state = states.fade_out_dungeon
 		decision.intent = MainPhaseDecision.intents.add_monster
 	Gameplay.end_turn(decision)
+
+func bail_out():
+	state = states.fade_out
+	home = null

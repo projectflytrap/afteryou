@@ -44,7 +44,7 @@ func replicate_end_turn_decision(decision):
 	#REPEAT WHAT THE DECISION WAS!!!
 	match d.intent:
 		MainPhaseDecision.intents.bail:
-			pass
+			get_tree().call_group("RealMonsterCard", "bail_out")
 		MainPhaseDecision.intents.remove_equipment:
 			Global.main_scene.game_world.all_equipment[d.equipment_id].remove()
 	#AWAIT THE DECISION TO FINISH FIRST.

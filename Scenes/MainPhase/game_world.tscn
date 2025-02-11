@@ -11,6 +11,9 @@
 properties/0/path = NodePath("Synchronizer:current_target_index")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath("Synchronizer:flag_raise_amount")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="Environment" id="Environment_cdyar"]
 glow_enabled = true
@@ -95,9 +98,8 @@ shape = SubResource("WorldBoundaryShape2D_rcdxo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryBottom"]
 shape = SubResource("WorldBoundaryShape2D_a82ti")
 
-[node name="Node2D" parent="." instance=ExtResource("5_8nk5a")]
-visible = false
-position = Vector2(1558, 840)
-
 [node name="BailCard" parent="." instance=ExtResource("6_m2833")]
 position = Vector2(1927, 722)
+
+[node name="Flag" parent="." instance=ExtResource("5_8nk5a")]
+position = Vector2(1922, 1080)

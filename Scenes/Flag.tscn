@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://by64bo8jww6we"]
 
+[ext_resource type="Script" path="res://Scenes/flag.gd" id="1_s17r5"]
 [ext_resource type="Shader" path="res://GUI/flag.gdshader" id="1_tqc28"]
 [ext_resource type="Texture2D" uid="uid://cchn5vecwrvhp" path="res://Art/GUI/WhiteSquare.png" id="2_kqms8"]
-[ext_resource type="FontFile" uid="uid://sa61p83ombl0" path="res://fonts/Lexend/LexendDeca-Black.ttf" id="3_3tiyg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e7c4w"]
 noise_type = 3
@@ -24,38 +24,17 @@ shader_parameter/frequency_y = 12.0
 shader_parameter/frequency_x = 2.96
 shader_parameter/amplitude_y = 8.39
 shader_parameter/amplitude_x = 2.5
-shader_parameter/inclination = -8.845
+shader_parameter/inclination = 23.0
 shader_parameter/shadow_col = Color(0.722797, 0.762898, 0.855762, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_ea4u7")
 
-[node name="Node2D" type="Node2D"]
-texture_filter = 1
+[node name="Flag" type="Node2D" groups=["Flag"]]
+script = ExtResource("1_s17r5")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="FlagPolygon" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_jk0q5")
-scale = Vector2(-1, 1)
+position = Vector2(0, -160)
+scale = Vector2(-2.5, 2.5)
 antialiased = true
 texture = ExtResource("2_kqms8")
 polygon = PackedVector2Array(0, 0, 16, 0, 24, 0, 32, 0, 40, 0, 48, 0, 56, 0, 64, 0, 72, 0, 80, 0, 80, 8, 80, 16, 80, 24, 80, 32, 80, 40, 80, 48, 80, 56, 80, 64, 72, 64, 64, 64, 56, 64, 48, 64, 40, 64, 32, 64, 24, 64, 16, 64, 0, 64)
-
-[node name="Panel" type="PanelContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 12
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer"]
-clip_contents = false
-layout_mode = 2
-theme_override_constants/outline_size = 32
-theme_override_fonts/normal_font = ExtResource("3_3tiyg")
-theme_override_font_sizes/normal_font_size = 64
-text = "BAIL"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0

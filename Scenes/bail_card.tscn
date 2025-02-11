@@ -1,13 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://cotcgh0ugvira"]
+[gd_scene load_steps=14 format=3 uid="uid://cotcgh0ugvira"]
 
-[ext_resource type="Texture2D" uid="uid://ondnbbtfj0ad" path="res://Art/GUI/BailCard.png" id="1_ebnlk"]
 [ext_resource type="Script" path="res://Scenes/bail_card_base.gd" id="1_mqsan"]
 [ext_resource type="Script" path="res://Scenes/bail_card.gd" id="1_yxsg3"]
 [ext_resource type="FontFile" uid="uid://sa61p83ombl0" path="res://fonts/Lexend/LexendDeca-Black.ttf" id="2_j3rkv"]
 [ext_resource type="Texture2D" uid="uid://0384q68s1r2h" path="res://Art/GUI/Rope.png" id="2_xtnva"]
+[ext_resource type="Texture2D" uid="uid://dm4vbehfyr3pc" path="res://Art/GUI/BailCard2.png" id="4_3bsf5"]
+[ext_resource type="Shader" path="res://Scenes/bail_card.gdshader" id="4_cyoww"]
+[ext_resource type="Texture2D" uid="uid://kxxh71dh2q0d" path="res://Art/GUI/BailCard2_success.png" id="4_t2a2p"]
+[ext_resource type="Texture2D" uid="uid://bvl1bvdoui2x6" path="res://Art/GUI/BailCardOutline.png" id="5_x8xmv"]
+[ext_resource type="Texture2D" uid="uid://c1bbaf8kxo12f" path="res://Art/GUI/RopeEnd.png" id="8_ti0ur"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sp3ix"]
 friction = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50y1r"]
+shader = ExtResource("4_cyoww")
+shader_parameter/border_color = Color(0, 0, 0, 1)
+shader_parameter/border_glow_color = Color(0.984079, 0.832765, 0, 1)
+shader_parameter/border_glow_amount = 0.0
+shader_parameter/border_glow_strength = 1.5
+shader_parameter/darken = 1.0
+shader_parameter/border = ExtResource("5_x8xmv")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlbmv"]
 radius = 79.0
@@ -32,15 +45,17 @@ texture_filter = 1
 position = Vector2(-146, 0)
 collision_priority = 5.0
 input_pickable = true
-mass = 6.0
+mass = 3.0
 physics_material_override = SubResource("PhysicsMaterial_sp3ix")
 freeze_mode = 1
 script = ExtResource("1_yxsg3")
+success_image = ExtResource("4_t2a2p")
+normal_image = ExtResource("4_3bsf5")
 
 [node name="BailCard" type="Sprite2D" parent="BailCard"]
-texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("1_ebnlk")
+texture_filter = 6
+material = SubResource("ShaderMaterial_50y1r")
+texture = ExtResource("4_3bsf5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BailCard"]
 visible = false
@@ -67,8 +82,13 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="RopeEnd" type="Sprite2D" parent="BailCard"]
+texture_filter = 2
+position = Vector2(93, -1)
+texture = ExtResource("8_ti0ur")
+
 [node name="PinJoint2D" type="DampedSpringJoint2D" parent="."]
-position = Vector2(-40, 0)
+position = Vector2(-46, 7.45058e-09)
 rotation = -1.5677
 node_a = NodePath("../BailCard")
 node_b = NodePath("../Anchor")

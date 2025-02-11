@@ -48,6 +48,7 @@ func start_turn(new_current_player, current_player_pid):
 	Gameplay.current_player = new_current_player
 	set_player_icon_turn()
 	Global.targeter.update_color_to_current_player()
+	get_tree().call_group("Flag", "set_color")
 	if new_current_player == Global.player_number:
 		#It is OUR TURN
 		start_my_turn()

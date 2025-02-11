@@ -12,7 +12,6 @@ var current_replicated_monster_card
 @onready var monster_card_replica = preload("res://Scenes/MainPhase/monster_card_replicated.tscn")
 @onready var monster_card = preload("res://Scenes/MonsterCard.tscn")
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var character = load("res://Characters/Wanderer/wanderer_info.tres")
