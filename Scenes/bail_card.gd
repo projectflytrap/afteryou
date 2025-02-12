@@ -9,7 +9,6 @@ var click_offset : Vector2
 @onready var anchor = get_parent().get_node("Anchor")
 @export var success_image : Texture
 @export var normal_image : Texture
-var block_input = false
 const max_distance : float = 500.0
 const MIN_MOUSE_DIST : float = 100.0
 const MAX_MOUSE_DIST : float = 700.0
@@ -23,7 +22,7 @@ func _physics_process(delta):
 	#print(Global.held_object == null && mouse_in)
 	#print(Input.is_action_pressed("click"))
 	var distance = global_position.distance_to(anchor.global_position)
-	if Gameplay.am_i_current_player() && !block_input:
+	if Gameplay.am_i_current_player() && !Gameplay.block_bail:
 		if held:
 			global_transform.origin = get_global_mouse_position() + click_offset
 			global_rotation = lerp_angle(global_rotation, (anchor.global_position - global_position).angle(), delta * 12.0)
@@ -40,18 +39,20 @@ func _physics_process(delta):
 				bail_sprite.material.set_shader_parameter("border_glow_color", lerp(player_hold_near, player_hold_far, inverse_lerp(0.0, max_distance, rec_dist)))
 			if Input.is_action_just_released("Click"):
 				drop()
+				Gameplay.block_action_type = MainPhaseDecision.intents.none
 				if rec_dist >= max_distance:
 					linear_velocity = Vector2.ZERO
 					angular_velocity = 0.0
 					end_turn()
+					Gameplay.block_action_turn = true
 		else:
 			get_tree().call_group("Synchronizer", "_set_flag_raise_amount", 0.0)
 			bail_sprite.texture = normal_image
 			bail_sprite.material.set_shader_parameter("border_glow_amount", Kinematics.dampf(bail_sprite.material.get_shader_parameter("border_glow_amount"), get_mouse_attraction()*0.7, 6.0, delta))
 			bail_sprite.material.set_shader_parameter("border_glow_color", lerp(player_mouse_far, player_mouse_near, get_mouse_attraction()))
 	else:
-		if Gameplay.am_i_current_player():
-			block_input = false
+		#if Gameplay.am_i_current_player():
+			#block_input = false
 		held = false
 		bail_sprite.material.set_shader_parameter("border_glow_amount", Kinematics.dampf(bail_sprite.material.get_shader_parameter("border_glow_amount"), 0.0, 5.0, delta))
 	# Calculate the direction and distance between anchor and marker
@@ -64,12 +65,16 @@ func _physics_process(delta):
 func pickup():
 	if held:
 		return
+	if !Gameplay.is_unblocked(MainPhaseDecision.intents.bail) || Gameplay.block_bail:
+		return
 	freeze = true
 	held = true
 	gravity_scale = 0.0
+	Gameplay.block_action_type = MainPhaseDecision.intents.bail
 	
 func drop(impulse=Vector2.ZERO):
 	if held:
+		
 		freeze_mode = FreezeMode.FREEZE_MODE_STATIC
 		freeze = false
 		apply_central_impulse(impulse)

@@ -68,7 +68,8 @@ func _process(delta: float) -> void:
 			var flip_amount : float = get_flip_amount()
 			var border_glow_amount : float = 0.3 + 0.7*flip_amount
 			var border_glow_color = lerp(COLOR_FLIPPING_NONE, COLOR_ATTRACTED, flip_amount)
-			if cardback.material.get_shader_parameter("overwrite_angle_amount") >= 0.995:
+			if cardback.material.get_shader_parameter("overwrite_angle_amount") >= 0.995 && (Gameplay.is_unblocked(MainPhaseDecision.intents.remove_equipment) || Gameplay.is_unblocked(MainPhaseDecision.intents.add_monster)):
+				Gameplay.block_bail = true
 				Global.targeter.base = self
 				Global.targeter.targeting = true
 				state = states.revealed
@@ -131,16 +132,22 @@ func get_screen_position() -> Vector2:
 	return Vector2(Global.game_size.x - cardback.size.x * 0.5 - 60.0, cardback.size.y * 0.5 + 60.0)
 
 func card_action_chosen(_target):
+	if !(Gameplay.is_unblocked(MainPhaseDecision.intents.remove_equipment) || Gameplay.is_unblocked(MainPhaseDecision.intents.add_monster)):
+		return
 	var decision : MainPhaseDecision = MainPhaseDecision.new()
 	home = _target
+	Gameplay.block_action_turn = true
 	if _target.is_in_group("Equipment"):
+		Gameplay.block_action_type = MainPhaseDecision.intents.remove_equipment
 		state = states.fade_out
 		decision.intent = MainPhaseDecision.intents.remove_equipment
 		decision.equipment_id = _target.id
 	else:
+		Gameplay.block_action_type = MainPhaseDecision.intents.add_monster
 		state = states.fade_out_dungeon
 		decision.intent = MainPhaseDecision.intents.add_monster
 	Gameplay.end_turn(decision)
+	Gameplay.block_action_turn = true
 
 func bail_out():
 	state = states.fade_out

@@ -48,6 +48,7 @@ func start_turn(new_current_player, current_player_pid):
 	Gameplay.current_player = new_current_player
 	set_player_icon_turn()
 	Global.targeter.update_color_to_current_player()
+	
 	get_tree().call_group("Flag", "set_color")
 	if new_current_player == Global.player_number:
 		#It is OUR TURN
@@ -62,6 +63,8 @@ func start_turn(new_current_player, current_player_pid):
 		i.current_target_index = -1
 
 func start_my_turn():
+	Gameplay.reset_blocks(false)
+	Gameplay.block_bail = false
 	your_turn_banner._play_your_turn_animation()
 	game_world.draw_interactable_card()
 	if game_world.has_replicated_monster_card:
@@ -69,6 +72,8 @@ func start_my_turn():
 	#Global.add_chat_text("Starting my turn")
 
 func start_other_turn():
+	Gameplay.reset_blocks(true)
+	Gameplay.block_bail = true
 	if not game_world.has_replicated_monster_card:
 		game_world.spawn_replicated_monster_card()
 	#Global.add_chat_text("Starting other player's turn: " + str(Gameplay.current_player))

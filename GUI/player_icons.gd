@@ -20,3 +20,7 @@ func _set_turn_indicator():
 	if active:
 		animation_player.play("End_Turn")
 		active = false
+
+func set_bail(p_num : int, bail : bool):
+	if player_number == p_num:
+		%ProfilePanel.modulate.a = 0.3 + 0.7 * float(!bail)

@@ -3,17 +3,31 @@ extends Node
 var rand : RandomNumberGenerator = RandomNumberGenerator.new()
 #Replicable effects will ALWAYS use rand.
 var turn_order = []
-var local_player_info = {}
+var bailed_players = []
+var local_player_info = {} #player number is the key
 enum game_phases {main}
 
 var current_player : int = -1 #Nobody is going yet. Usually happens in reset game state.
 var reveal_phase : bool = false
 var game_phase = 0
 
+var block_action_type : MainPhaseDecision.intents = MainPhaseDecision.intents.none #Whether or not an action type has already been intitiated
+var block_action_turn : bool = true #Whether or not an action has been activated this turn.
+var block_bail : bool = false
+
+func reset_blocks(status : bool):
+	block_action_type = MainPhaseDecision.intents.none
+	block_action_turn = status
+	block_bail = status
+
+func is_unblocked(intent : MainPhaseDecision.intents) -> bool:
+	return (block_action_type != intent || block_action_type == MainPhaseDecision.intents.none) && !block_action_turn
+
 func reset_game():
 	if multiplayer.get_unique_id() != 1:
 		return
 	game_phase = game_phases.main
+	bailed_players = []
 	current_player = -1
 
 func end_turn(decision : MainPhaseDecision):
@@ -45,6 +59,10 @@ func replicate_end_turn_decision(decision):
 	match d.intent:
 		MainPhaseDecision.intents.bail:
 			get_tree().call_group("RealMonsterCard", "bail_out")
+			bailed_players.append(current_player)
+			get_tree().call_group("PlayerIcon", "set_bail", current_player, true)
+			var build_print : String = Global.get_bb_code_wrapped_color(Values.get_color_main(current_player), local_player_info[current_player].username) + " has bailed. Only " + Global.get_bb_code_wrapped_color(Color.RED,str(check_bail().size())) + " players remain."
+			Global.add_chat_text(build_print)
 		MainPhaseDecision.intents.remove_equipment:
 			Global.main_scene.game_world.all_equipment[d.equipment_id].remove()
 	#AWAIT THE DECISION TO FINISH FIRST.
@@ -55,11 +73,21 @@ func next_turn():
 	if multiplayer.get_unique_id() != 1:
 		return
 	#print("Host calling next_turn")
-	increment_player()
-	Global.main_scene.rpc("start_turn", current_player, get_pid_of_current_player())
+	if check_bail().size() == 1:
+		print("End main_phase, send player ", check_bail())
+	else:
+		increment_player()
+		Global.main_scene.rpc("start_turn", current_player, get_pid_of_current_player())
 
-func increment_player():
-	#var old_player = current_player
+func check_bail() -> Array: #Returns player numbers of players who haven't bailed yet.
+	var non_bailed_valid_players : Array = []
+	for i in turn_order:
+		if !bailed_players.has(i):
+			non_bailed_valid_players.append(i)
+	return non_bailed_valid_players
+
+func increment_player(): 
+	#var old_player : int = current_player
 	if current_player == -1:
 		current_player = turn_order[0]
 		return
@@ -69,6 +97,9 @@ func increment_player():
 	#print("Old player: ", old_player, " Current player: ", current_player)
 	#WIP: Check if the current player is disconnected. Not sure what to do yet.
 	#if Network.get_player_info_from_pnum(current_player).disconnected
+	if bailed_players.has(current_player):
+		increment_player()
+	
 
 func get_pid_of_current_player():
 	for x in Network.player_data.keys():

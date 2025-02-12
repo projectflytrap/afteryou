@@ -45,7 +45,10 @@ func main_phase_targeting(delta: float):
 	visible = modulate.a >= 0.05
 
 func draw_target(target_position : Vector2, delta : float):
-	var new_points = _get_points(base.position, target_position)
+	var base_pos : Vector2 = base.position
+	if !base || !is_instance_valid(base):
+		base_pos = points[0]
+	var new_points = _get_points(base_pos, target_position)
 	if points.size()-1 != ARC_POINTS:
 		points = new_points
 	else:
