@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkk53iq7gyj3x"]
 
-[ext_resource type="Script" path="res://Phases/main.gd" id="1_22uwx"]
+[ext_resource type="Script" uid="uid://d1m066lxv52s0" path="res://Phases/main.gd" id="1_22uwx"]
 [ext_resource type="Theme" uid="uid://brklmhs1by71a" path="res://GUI/Main_theme.tres" id="1_ip8bt"]
-[ext_resource type="Script" path="res://Phases/chat_line_edit.gd" id="2_atisn"]
-[ext_resource type="Script" path="res://Phases/chatbox.gd" id="2_d8833"]
+[ext_resource type="Script" uid="uid://bxxjlmi2jdvgr" path="res://Phases/chat_line_edit.gd" id="2_atisn"]
+[ext_resource type="Script" uid="uid://xgnin250f1gs" path="res://Phases/chatbox.gd" id="2_d8833"]
 [ext_resource type="PackedScene" uid="uid://d2io0aakdcom3" path="res://Scenes/MainPhase/game_world.tscn" id="2_x3irw"]
 [ext_resource type="PackedScene" uid="uid://dusl3g51mvbuq" path="res://GUI/your_turn_banner.tscn" id="3_eqb8d"]
 [ext_resource type="PackedScene" uid="uid://nt62xwhx152w" path="res://GUI/player_icon_big.tscn" id="5_ylh0j"]

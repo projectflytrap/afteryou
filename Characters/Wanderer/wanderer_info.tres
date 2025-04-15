@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CharacterInfo" load_steps=13 format=3 uid="uid://b3mcmum86p28o"]
 
-[ext_resource type="Script" path="res://System/Equipment.gd" id="1_q57xg"]
+[ext_resource type="Script" uid="uid://gish654028jh" path="res://System/Equipment.gd" id="1_q57xg"]
 [ext_resource type="Resource" uid="uid://c40nc2dxsu4bu" path="res://Characters/Wanderer/E_glaive.tres" id="2_tc8s1"]
-[ext_resource type="Script" path="res://System/CharacterInfo.gd" id="3_p5ri6"]
+[ext_resource type="Script" uid="uid://oansahh31vxo" path="res://System/CharacterInfo.gd" id="3_p5ri6"]
 
 [sub_resource type="Resource" id="Resource_i3xpw"]
 script = ExtResource("1_q57xg")

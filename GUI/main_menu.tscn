@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ftccgwapueck"]
 
-[ext_resource type="Script" path="res://GUI/main_menu.gd" id="1_k1glb"]
+[ext_resource type="Script" uid="uid://d13w2o0e6mt3t" path="res://GUI/main_menu.gd" id="1_k1glb"]
 [ext_resource type="Theme" uid="uid://brklmhs1by71a" path="res://GUI/Main_theme.tres" id="1_xk644"]
-[ext_resource type="Script" path="res://Phases/chatbox.gd" id="2_5a1ng"]
+[ext_resource type="Script" uid="uid://xgnin250f1gs" path="res://Phases/chatbox.gd" id="2_5a1ng"]
 
 [node name="MainMenu" type="Control"]
 texture_filter = 5

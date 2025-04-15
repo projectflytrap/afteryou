@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://c4i4aes2j7ail"]
 
 [ext_resource type="Texture2D" uid="uid://b705maed4bh8m" path="res://Art/Card/Monster/MonsterCardBack.png" id="1_1trvx"]
-[ext_resource type="Script" path="res://Scenes/monster_card.gd" id="1_mwlha"]
+[ext_resource type="Script" uid="uid://byn3m13ajumwe" path="res://Scenes/monster_card.gd" id="1_mwlha"]
 [ext_resource type="Material" uid="uid://b4p3abbld4db3" path="res://Scenes/MonsterCardFade.tres" id="2_lvat7"]
 [ext_resource type="Material" uid="uid://dcs4x6asikpuw" path="res://Scenes/MonsterCard.tres" id="2_qkf34"]
 [ext_resource type="Texture2D" uid="uid://dvruobajwiasv" path="res://Art/Card/Monster/CardBorderFadeUp.png" id="5_wg4he"]

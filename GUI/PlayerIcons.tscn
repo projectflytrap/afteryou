@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://dxsvspk6dy77x"]
 
 [ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
-[ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
-[ext_resource type="Script" path="res://GUI/player_icons.gd" id="1_qlet4"]
+[ext_resource type="Shader" uid="uid://cuuga35mpih46" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
+[ext_resource type="Script" uid="uid://ce8uvsdmmgbx3" path="res://GUI/player_icons.gd" id="1_qlet4"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="2_anlsm"]
 [ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="2_jwfq2"]
 [ext_resource type="StyleBox" uid="uid://bs57swxatfq32" path="res://GUI/ProfilePicturePanelStyleBox.tres" id="2_tvykx"]
@@ -87,9 +87,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g0uo7"]
 _data = {
-"End_Turn": SubResource("Animation_sdosf"),
-"RESET": SubResource("Animation_c0pt8"),
-"Start_Turn": SubResource("Animation_lfc7e")
+&"End_Turn": SubResource("Animation_sdosf"),
+&"RESET": SubResource("Animation_c0pt8"),
+&"Start_Turn": SubResource("Animation_lfc7e")
 }
 
 [sub_resource type="Gradient" id="Gradient_x4mby"]
@@ -102,6 +102,8 @@ gradient = SubResource("Gradient_x4mby")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c53e7"]
 resource_local_to_scene = true
 shader = ExtResource("1_jtc5d")
+shader_parameter/noise = ExtResource("2_jwfq2")
+shader_parameter/text = ExtResource("3_3ie56")
 shader_parameter/stretch = Vector2(0.2, 0.05)
 shader_parameter/stretch2 = Vector2(0.5, 1)
 shader_parameter/xAdd = 0.0
@@ -109,11 +111,9 @@ shader_parameter/xAdd2 = 0.0
 shader_parameter/randPos = Vector2(0, 0)
 shader_parameter/vanishSpeed = 0.2
 shader_parameter/scrollSpeed = 0.4
+shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
 shader_parameter/opacity = 0.677
 shader_parameter/extend = 0.0
-shader_parameter/noise = ExtResource("2_jwfq2")
-shader_parameter/text = ExtResource("3_3ie56")
-shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qloiw"]
 content_margin_left = 0.0

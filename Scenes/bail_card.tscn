@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://cotcgh0ugvira"]
 
-[ext_resource type="Script" path="res://Scenes/bail_card_base.gd" id="1_mqsan"]
-[ext_resource type="Script" path="res://Scenes/bail_card.gd" id="1_yxsg3"]
+[ext_resource type="Script" uid="uid://b3d8yoqilduv" path="res://Scenes/bail_card_base.gd" id="1_mqsan"]
+[ext_resource type="Script" uid="uid://bsi270jpxcxvr" path="res://Scenes/bail_card.gd" id="1_yxsg3"]
 [ext_resource type="FontFile" uid="uid://sa61p83ombl0" path="res://fonts/Lexend/LexendDeca-Black.ttf" id="2_j3rkv"]
 [ext_resource type="Texture2D" uid="uid://0384q68s1r2h" path="res://Art/GUI/Rope.png" id="2_xtnva"]
 [ext_resource type="Texture2D" uid="uid://dm4vbehfyr3pc" path="res://Art/GUI/BailCard2.png" id="4_3bsf5"]
-[ext_resource type="Shader" path="res://Scenes/bail_card.gdshader" id="4_cyoww"]
+[ext_resource type="Shader" uid="uid://cxncgyol2f807" path="res://Scenes/bail_card.gdshader" id="4_cyoww"]
 [ext_resource type="Texture2D" uid="uid://kxxh71dh2q0d" path="res://Art/GUI/BailCard2_success.png" id="4_t2a2p"]
 [ext_resource type="Texture2D" uid="uid://bvl1bvdoui2x6" path="res://Art/GUI/BailCardOutline.png" id="5_x8xmv"]
 [ext_resource type="Texture2D" uid="uid://c1bbaf8kxo12f" path="res://Art/GUI/RopeEnd.png" id="8_ti0ur"]
@@ -15,12 +15,12 @@ friction = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50y1r"]
 shader = ExtResource("4_cyoww")
+shader_parameter/border = ExtResource("5_x8xmv")
 shader_parameter/border_color = Color(0, 0, 0, 1)
 shader_parameter/border_glow_color = Color(0.984079, 0.832765, 0, 1)
 shader_parameter/border_glow_amount = 0.0
 shader_parameter/border_glow_strength = 1.5
 shader_parameter/darken = 1.0
-shader_parameter/border = ExtResource("5_x8xmv")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlbmv"]
 radius = 79.0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://d2io0aakdcom3"]
 
-[ext_resource type="Script" path="res://Scenes/MainPhase/game_world.gd" id="1_tcft4"]
-[ext_resource type="Script" path="res://Scenes/MainPhase/synchronizer.gd" id="2_7tvpj"]
-[ext_resource type="Script" path="res://Scenes/MainPhase/targeting_arrow.gd" id="3_ofblo"]
+[ext_resource type="Script" uid="uid://d7ku6km3cry3" path="res://Scenes/MainPhase/game_world.gd" id="1_tcft4"]
+[ext_resource type="Script" uid="uid://iixqa8gn7amg" path="res://Scenes/MainPhase/synchronizer.gd" id="2_7tvpj"]
+[ext_resource type="Script" uid="uid://dc1np07q4goho" path="res://Scenes/MainPhase/targeting_arrow.gd" id="3_ofblo"]
 [ext_resource type="Texture2D" uid="uid://1bm72wo4ciny" path="res://Art/GUI/ArrowEnd.png" id="4_cob34"]
 [ext_resource type="PackedScene" uid="uid://by64bo8jww6we" path="res://Scenes/Flag.tscn" id="5_8nk5a"]
 [ext_resource type="PackedScene" uid="uid://cotcgh0ugvira" path="res://Scenes/bail_card.tscn" id="6_m2833"]

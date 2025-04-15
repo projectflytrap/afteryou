@@ -188,7 +188,7 @@ noise = SubResource("FastNoiseLite_bvbjl")
 [resource]
 shader = SubResource("Shader_3hitd")
 shader_parameter/mouse_position = Vector2(0, 0)
-shader_parameter/sprite_position = null
+shader_parameter/sprite_position = Vector2(0, 0)
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
 shader_parameter/inset = 0.0

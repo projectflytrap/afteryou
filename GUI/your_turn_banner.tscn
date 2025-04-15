@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dusl3g51mvbuq"]
 
 [ext_resource type="FontFile" uid="uid://3mxbukxjqb4p" path="res://fonts/Lexend/LexendDeca-Bold.ttf" id="1_h7ejr"]
-[ext_resource type="Script" path="res://GUI/your_turn_banner.gd" id="1_l4j3a"]
-[ext_resource type="Shader" path="res://GUI/your_turn_banner.gdshader" id="2_ld2fk"]
+[ext_resource type="Script" uid="uid://b812no5beyl2s" path="res://GUI/your_turn_banner.gd" id="1_l4j3a"]
+[ext_resource type="Shader" uid="uid://c3oeraem462se" path="res://GUI/your_turn_banner.gdshader" id="2_ld2fk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4vh1x"]
 shader = ExtResource("2_ld2fk")
@@ -118,8 +118,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g0pj4"]
 _data = {
-"Flash": SubResource("Animation_br1np"),
-"RESET": SubResource("Animation_6ovuq")
+&"Flash": SubResource("Animation_br1np"),
+&"RESET": SubResource("Animation_6ovuq")
 }
 
 [node name="YourTurnBanner" type="VBoxContainer"]

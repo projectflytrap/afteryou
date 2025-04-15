@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bu2x2lxex4o6t"]
 
-[ext_resource type="Script" path="res://Scenes/MainPhase/monster_card_replicated.gd" id="1_hd37q"]
+[ext_resource type="Script" uid="uid://435bbayo5sie" path="res://Scenes/MainPhase/monster_card_replicated.gd" id="1_hd37q"]
 [ext_resource type="Material" uid="uid://b6y31xmpiqwxu" path="res://Scenes/MainPhase/monster_card_replicated.tres" id="2_2j6v1"]
 [ext_resource type="Texture2D" uid="uid://b705maed4bh8m" path="res://Art/Card/Monster/MonsterCardBack.png" id="2_sjkyk"]
 

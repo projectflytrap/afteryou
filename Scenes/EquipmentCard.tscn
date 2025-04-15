@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://chdmowrf3l3v8"]
 
-[ext_resource type="Script" path="res://Scenes/equipment_card.gd" id="1_o4try"]
+[ext_resource type="Script" uid="uid://dsxyrxn23056y" path="res://Scenes/equipment_card.gd" id="1_o4try"]
 [ext_resource type="Texture2D" uid="uid://wopib4ofal2f" path="res://Art/Card/Characters/Delete.png" id="2_cpsah"]
 [ext_resource type="Texture2D" uid="uid://vkagbomrd0w" path="res://Art/Card/Characters/Wanderer/CardTemplate.png" id="2_p06rw"]
-[ext_resource type="Shader" path="res://Scenes/EquipmentCard.gdshader" id="2_qno78"]
+[ext_resource type="Shader" uid="uid://dalh7t7u1swdh" path="res://Scenes/EquipmentCard.gdshader" id="2_qno78"]
 [ext_resource type="Texture2D" uid="uid://datv6gyouphxq" path="res://Art/Card/Characters/Wanderer/EquipmentBackground.png" id="3_08jro"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="3_e4k1t"]
 [ext_resource type="Texture2D" uid="uid://dnr42uk11lx7b" path="res://Art/Card/Monster/CardFill.png" id="4_6mu7h"]
@@ -17,6 +17,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir87r"]
 resource_local_to_scene = true
 shader = ExtResource("2_qno78")
+shader_parameter/border = ExtResource("4_u621g")
+shader_parameter/inner_border = ExtResource("5_v2gln")
+shader_parameter/background = ExtResource("3_08jro")
 shader_parameter/border_color = Color(1, 1, 1, 1)
 shader_parameter/border_glow_color = Color(1, 0, 0, 1)
 shader_parameter/border_glow_amount = 0.0
@@ -25,9 +28,6 @@ shader_parameter/inner_border_color = Color(0.242511, 0.635456, 0, 1)
 shader_parameter/background_color = Color(0.39388, 0.44757, 0.310077, 1)
 shader_parameter/background_opacity = 0.821
 shader_parameter/darken = 1.0
-shader_parameter/border = ExtResource("4_u621g")
-shader_parameter/inner_border = ExtResource("5_v2gln")
-shader_parameter/background = ExtResource("3_08jro")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2yd"]
 bg_color = Color(0.352941, 0.282353, 0, 0.768627)

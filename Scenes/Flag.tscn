@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://by64bo8jww6we"]
 
-[ext_resource type="Script" path="res://Scenes/flag.gd" id="1_s17r5"]
-[ext_resource type="Shader" path="res://GUI/flag.gdshader" id="1_tqc28"]
+[ext_resource type="Script" uid="uid://banuyqwrquhgl" path="res://Scenes/flag.gd" id="1_s17r5"]
+[ext_resource type="Shader" uid="uid://bo5yqt1dc3b3v" path="res://GUI/flag.gdshader" id="1_tqc28"]
 [ext_resource type="Texture2D" uid="uid://cchn5vecwrvhp" path="res://Art/GUI/WhiteSquare.png" id="2_kqms8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e7c4w"]
@@ -25,8 +25,8 @@ shader_parameter/frequency_x = 2.96
 shader_parameter/amplitude_y = 8.39
 shader_parameter/amplitude_x = 2.5
 shader_parameter/inclination = 23.0
-shader_parameter/shadow_col = Color(0.722797, 0.762898, 0.855762, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_ea4u7")
+shader_parameter/shadow_col = Color(0.722797, 0.762898, 0.855762, 1)
 
 [node name="Flag" type="Node2D" groups=["Flag"]]
 script = ExtResource("1_s17r5")

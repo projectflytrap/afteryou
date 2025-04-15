@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://nt62xwhx152w"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvspk6dy77x" path="res://GUI/PlayerIcons.tscn" id="1_h8rfc"]
-[ext_resource type="Shader" path="res://GUI/PlayerIcons.gdshader" id="2_1744e"]
+[ext_resource type="Shader" uid="uid://cuuga35mpih46" path="res://GUI/PlayerIcons.gdshader" id="2_1744e"]
 [ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="3_imp2r"]
 [ext_resource type="Texture2D" uid="uid://dhpxwsd0fwp3e" path="res://Art/Textures/Trails/Honeytrail1.png" id="4_6otcq"]
 
@@ -31,6 +31,8 @@ gradient = SubResource("Gradient_x4mby")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6hodx"]
 resource_local_to_scene = true
 shader = ExtResource("2_1744e")
+shader_parameter/noise = ExtResource("3_imp2r")
+shader_parameter/text = ExtResource("4_6otcq")
 shader_parameter/stretch = Vector2(0.2, 0.05)
 shader_parameter/stretch2 = Vector2(0.5, 1)
 shader_parameter/xAdd = 0.0
@@ -38,11 +40,9 @@ shader_parameter/xAdd2 = 0.0
 shader_parameter/randPos = Vector2(0, 0)
 shader_parameter/vanishSpeed = 0.2
 shader_parameter/scrollSpeed = 0.4
+shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
 shader_parameter/opacity = 0.677
 shader_parameter/extend = 0.0
-shader_parameter/noise = ExtResource("3_imp2r")
-shader_parameter/text = ExtResource("4_6otcq")
-shader_parameter/colRamp = SubResource("GradientTexture1D_spqjd")
 
 [node name="PlayerIconBig" instance=ExtResource("1_h8rfc")]
 mouse_filter = 2

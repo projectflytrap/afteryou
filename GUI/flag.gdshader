@@ -15,7 +15,6 @@ vec2 get_distortion(vec2 uv){
 	distortion.x = cos((uv.y - TIME * speed) * frequency_x) * amplitude_x * uv.x;
 	distortion.x += texture(noise, -vec2(speed * TIME) + uv * vec2(0.5, 0.4)).r * uv.x * 20.0;
 	distortion.y += texture(noise, vec2(speed * TIME) + uv * vec2(0.5, 0.4)).r * uv.x * 20.0;
-	
 	return distortion;
 }
 
@@ -25,7 +24,6 @@ void vertex() {
 	distortion.y += inclination_v * UV.x;
 	VERTEX += distortion;
 	VERTEX.x *= 1.0-(inclination_v/50.0);
-	//VERTEX.x -= UV.y * inclination;
 }
 
 void fragment(){
