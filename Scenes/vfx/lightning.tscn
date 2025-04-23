@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://dr6yljyahw6bn"]
+
+[ext_resource type="Shader" uid="uid://ccl8pcnel0lgg" path="res://lightning.gdshader" id="1_p1yfi"]
+[ext_resource type="Texture2D" uid="uid://dmiu4aalgkr7a" path="res://Art/Textures/Trails/lightning.png" id="2_s68mp"]
+
+[sub_resource type="Gradient" id="Gradient_s68mp"]
+offsets = PackedFloat32Array(0, 0.254464, 0.321429, 0.544643, 0.705357, 0.852679, 1)
+colors = PackedColorArray(1, 0.833333, 0, 0, 0, 0.461667, 0.746498, 0.263393, 0.710465, 0.95382, 1, 0.321429, 0.936033, 0.989797, 1, 0.620536, 1, 1, 1, 0.705357, 1, 0.833333, 0, 0.933333, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ks66h"]
+gradient = SubResource("Gradient_s68mp")
+
+[sub_resource type="Gradient" id="Gradient_ks66h"]
+offsets = PackedFloat32Array(0, 0.5, 0.589286, 0.65625, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0703642, 0.0703642, 0.0703642, 1, 0.151786, 0.151786, 0.151786, 1, 0.883806, 0.883806, 0.883806, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kcdsg"]
+frequency = 0.0232
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s68mp"]
+width = 256
+height = 256
+seamless = true
+seamless_blend_skirt = 0.129
+color_ramp = SubResource("Gradient_ks66h")
+noise = SubResource("FastNoiseLite_kcdsg")
+
+[sub_resource type="Curve" id="Curve_kcdsg"]
+_data = [Vector2(0, 0), 0.0, 4.64445, 0, 0, Vector2(0.264, 1), 0.0, 0.0, 0, 0, Vector2(0.692, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.14122, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_i3rkf"]
+curve = SubResource("Curve_kcdsg")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s68mp"]
+shader = ExtResource("1_p1yfi")
+shader_parameter/scroll_texture = ExtResource("2_s68mp")
+shader_parameter/erosion = SubResource("NoiseTexture2D_s68mp")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_ks66h")
+shader_parameter/fade_gradient = SubResource("CurveTexture_i3rkf")
+shader_parameter/xAdd = 0.0
+shader_parameter/stretch = Vector2(2, 1)
+shader_parameter/speed = 0.95
+shader_parameter/dissipation = 1.0
+
+[node name="Lightning" type="Line2D"]
+material = SubResource("ShaderMaterial_s68mp")
+points = PackedVector2Array(114, 63, 300, 246, 287, 34, 494, 88, 566, 227, 642, 113, 800, 97)
+width = 100.0
+texture_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 50.0
