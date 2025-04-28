@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://clyb0d2pdv1xn"]
+
+[ext_resource type="Shader" uid="uid://d1kbweqcmc6vn" path="res://Scenes/vfx/death_fog.gdshader" id="1_go7pk"]
+
+[sub_resource type="Gradient" id="Gradient_igm1i"]
+offsets = PackedFloat32Array(0, 0.0990991, 0.27027, 0.369369, 0.427928, 0.536036, 0.716216, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0.0908772, 0.0772456, 1, 0, 0.14, 0.119, 0.435294, 0, 0.743667, 0.97, 0.776471, 0.5589, 0.69, 0.60697, 0.498039, 0.1638, 0.91, 0.785633, 0.647059, 0.098, 0.3332, 0.35, 0.694118, 0.5698, 0.706603, 0.77, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fl47k"]
+gradient = SubResource("Gradient_igm1i")
+
+[sub_resource type="Curve" id="Curve_go7pk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.350806, 0), 0.0601086, 0.0601086, 0, 0, Vector2(0.806452, 0.632472), 3.06923, 3.06923, 0, 0, Vector2(1, 1), 0.0601085, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_igm1i"]
+texture_mode = 1
+curve = SubResource("Curve_go7pk")
+
+[sub_resource type="Gradient" id="Gradient_go7pk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_igm1i"]
+noise_type = 2
+frequency = 0.0157
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fl47k"]
+seamless = true
+color_ramp = SubResource("Gradient_go7pk")
+noise = SubResource("FastNoiseLite_igm1i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igm1i"]
+shader = ExtResource("1_go7pk")
+shader_parameter/OCTAVE = 6
+shader_parameter/tiling_noise = SubResource("NoiseTexture2D_fl47k")
+shader_parameter/scale_noise = Vector2(1, 0.5)
+shader_parameter/time_scale = 0.3
+shader_parameter/opacity_curve = SubResource("CurveTexture_igm1i")
+shader_parameter/color_curve = SubResource("GradientTexture1D_fl47k")
+
+[node name="DeathFog" type="ColorRect"]
+material = SubResource("ShaderMaterial_igm1i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

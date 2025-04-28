@@ -24,7 +24,7 @@ shader_parameter/frequency_y = 12.0
 shader_parameter/frequency_x = 2.96
 shader_parameter/amplitude_y = 8.39
 shader_parameter/amplitude_x = 2.5
-shader_parameter/inclination = 23.415
+shader_parameter/inclination = -23.0
 shader_parameter/noise = SubResource("NoiseTexture2D_ea4u7")
 shader_parameter/shadow_col = Color(0.722797, 0.762898, 0.855762, 1)
 
