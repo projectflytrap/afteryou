@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dxsvspk6dy77x"]
+[gd_scene load_steps=21 format=3 uid="uid://dxsvspk6dy77x"]
 
 [ext_resource type="Texture2D" uid="uid://cxowaw0yu71f2" path="res://Art/PlayerIcons/OpheliaIcon.png" id="1_7qf50"]
 [ext_resource type="Shader" uid="uid://cuuga35mpih46" path="res://GUI/PlayerIcons.gdshader" id="1_jtc5d"]
 [ext_resource type="Script" uid="uid://ce8uvsdmmgbx3" path="res://GUI/player_icons.gd" id="1_qlet4"]
 [ext_resource type="FontFile" uid="uid://cceroa4ktqdql" path="res://fonts/Silver.ttf" id="2_anlsm"]
-[ext_resource type="Texture2D" uid="uid://174tjexk7lxd" path="res://Art/Textures/Noise/231.jpg" id="2_jwfq2"]
 [ext_resource type="StyleBox" uid="uid://bs57swxatfq32" path="res://GUI/ProfilePicturePanelStyleBox.tres" id="2_tvykx"]
 [ext_resource type="Texture2D" uid="uid://dhpxwsd0fwp3e" path="res://Art/Textures/Trails/Honeytrail1.png" id="3_3ie56"]
 [ext_resource type="Texture2D" uid="uid://bsawy2qh8ukrk" path="res://Art/GUI/WinProgress.png" id="3_co6qj"]
@@ -99,10 +98,23 @@ colors = PackedColorArray(1, 0.329412, 0.494118, 1, 0.837604, 0.718684, 0.558218
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_spqjd"]
 gradient = SubResource("Gradient_x4mby")
 
+[sub_resource type="Gradient" id="Gradient_4dbwf"]
+offsets = PackedFloat32Array(0, 0.324324, 0.833333, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.348746, 0.348746, 0.348746, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i5keo"]
+noise_type = 2
+frequency = 0.0107
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dccyi"]
+seamless = true
+color_ramp = SubResource("Gradient_4dbwf")
+noise = SubResource("FastNoiseLite_i5keo")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c53e7"]
 resource_local_to_scene = true
 shader = ExtResource("1_jtc5d")
-shader_parameter/noise = ExtResource("2_jwfq2")
+shader_parameter/noise = SubResource("NoiseTexture2D_dccyi")
 shader_parameter/text = ExtResource("3_3ie56")
 shader_parameter/stretch = Vector2(0.2, 0.05)
 shader_parameter/stretch2 = Vector2(0.5, 1)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpqt6ljyrkbb2"]
+
+[ext_resource type="Shader" uid="uid://dp3entl2jn6uh" path="res://Scenes/vfx/molten.gdshader" id="1_x1eho"]
+[ext_resource type="Texture2D" uid="uid://ceav0aclv386l" path="res://Art/Textures/Noise/noiseTextureColor.png" id="2_83ejf"]
+[ext_resource type="Texture2D" uid="uid://b38bokx54fsm4" path="res://icon.svg" id="3_7e054"]
+
+[sub_resource type="Gradient" id="Gradient_afjny"]
+offsets = PackedFloat32Array(0, 0.301802, 0.436937, 0.545045, 0.621622, 0.747748, 0.855856, 1)
+colors = PackedColorArray(1, 0.221209, 0.0211456, 1, 0.986208, 0.193843, 0.071706, 1, 0.794222, 0, 0.381387, 1, 0.996912, 0.215082, 0.0324651, 1, 0.587911, 2.83971e-06, 0.36963, 1, 0.911822, 0.52, 0.206324, 1, 0.925266, 0.82, 0.0773716, 1, 0.933333, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eysms"]
+gradient = SubResource("Gradient_afjny")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhpgi"]
+shader = ExtResource("1_x1eho")
+shader_parameter/sections = 5.0
+shader_parameter/timeScale = 0.01
+shader_parameter/noise1 = ExtResource("2_83ejf")
+shader_parameter/pow1 = 0.662
+shader_parameter/roundness = 0.748
+shader_parameter/width = 0.115
+shader_parameter/moltenGroundLUT = SubResource("GradientTexture1D_eysms")
+shader_parameter/maxWidth = 0.798
+shader_parameter/ground = Color(0, 0, 0, 0)
+shader_parameter/alpha = 0.439
+shader_parameter/moltenAlpha = 0.532
+
+[node name="Molten" type="Sprite2D"]
+material = SubResource("ShaderMaterial_bhpgi")
+texture = ExtResource("3_7e054")

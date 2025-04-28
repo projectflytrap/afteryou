@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjl53qiqrdpkx"]
+
+[ext_resource type="Texture2D" uid="uid://df1esoncu7wr8" path="res://Art/Card/Monster/frog-idle.png" id="1_alg1q"]
+[ext_resource type="Shader" uid="uid://cb71ea77xv1yt" path="res://Scenes/vfx/outline.gdshader" id="2_ngpil"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_778ah"]
+atlas = ExtResource("1_alg1q")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b4kt"]
+atlas = ExtResource("1_alg1q")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpqum"]
+atlas = ExtResource("1_alg1q")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc6gu"]
+atlas = ExtResource("1_alg1q")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_siu3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_778ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b4kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpqum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc6gu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bgyag"]
+shader = ExtResource("2_ngpil")
+shader_parameter/size = Vector2(64, 64)
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s8847"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Frog" type="Node2D"]
+texture_filter = 1
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SubViewport"]
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_siu3y")
+frame_progress = 0.222197
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bgyag")
+texture = SubResource("ViewportTexture_s8847")
